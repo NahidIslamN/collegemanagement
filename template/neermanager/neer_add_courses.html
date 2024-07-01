@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+
+{% block start %}
+
+{% if user.user_type == "5" %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">AddCourses for Neerapp</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Courses</a></li>
+    <li class="breadcrumb-item active">AddCourses for Neerapp</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+
+
+
+    
+    <form method="post", enctype="multipart/form-data" >
+        {% include "included/messages.html" %}
+    {% csrf_token %}
+
+    <div class="row">
+
+        <div class="col-12">
+            <h5 class="form-title"><span>Courses Details</span></h5>
+        </div>
+        
+        
+        <div class="col-12">
+            <div class="form-group">
+                <label>Department</label>
+                <select name="dep_name" required class="form-control">
+                <option value="">Select Department</option>
+                {% for x in Dep %}
+                <option value="{{x.id}}" >{{x.Dep_Name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+        
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Discriptions</label>
+                    <textarea required class="form-control"  name="dep_description"  cols="30" rows="5"> </textarea>
+                </div>
+            </div>
+ 
+
+    <div class="col-12">
+        <div class="form-group">
+        <label>Department Image</label>
+        <input required name="Dep_Image" type="file" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">ADD</button>
+    </div>
+
+     </div>
+    </form>
+    </div>
+    </div>
+    </div>
+     </div>
+    </div>
+    
+    {% endif %}
+
+{% endblock %}

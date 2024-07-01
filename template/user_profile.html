@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row">
+          <div class="col">
+             <h3 class="page-title">Profile</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active">Profile</li>
+             </ul>
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-md-12">
+          <div class="profile-header">
+             <div class="row align-items-center">
+                <div class="col-auto profile-image">
+                   <a href="#">
+                     {% if user.profile_pic %}
+                     <img class="rounded-circle" alt="User Image" src="{{user.profile_pic.url}}">
+                     {% else %}
+                     <img class="rounded-circle" src="/static/USERLOGO/USER.png" alt="User Image">
+                     {% endif %}   
+                   
+                   </a>
+                </div>
+                <div class="col ml-md-n2 profile-user-info">
+                   <h4 class="user-name mb-0"><span>{{user.first_name}}</span> <span>{{user.last_name}}</span></h4>
+                   {% if user.user_type == "1" %}
+                   <h6 class="text-muted">Principal</h6>
+                   {% elif user.user_type == "2" %}
+                   <h6 class="text-muted">Head of Department</h6>
+                   {% elif user.user_type == "3" %}
+                   <h6 class="text-muted">Teacher</h6>
+                   {% elif user.user_type == "4" %}
+                   <h6 class="text-muted">Student</h6>
+                   {% elif user.user_type == "5" %}
+                   <h6 class="text-muted">Homepage Manager</h6>
+                   {% else  %}
+                   <h6 class="text-muted">Not A Valid User</h6>
+                   {% endif %}
+                </div>
+                <div class="col-auto profile-btn">
+
+                  {% if user.is_authenticated %}
+                  {% if user.user_type == "4" %}
+
+                  {% else %}
+                   <a href="/user_profile_edite/{{user.username}}/" class="btn btn-primary">
+                     Edit Profile
+                   </a>
+                  {% endif %}
+                  {% endif %}
+
+                </div>
+             </div>
+          </div>
+          <div class="profile-menu">
+             <ul class="nav nav-tabs nav-tabs-solid">
+                <li class="nav-item">
+                   <a class="nav-link active" data-toggle="tab" href="#per_details_tab">About</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" data-toggle="tab" href="#password_tab">Password</a>
+                </li>
+             </ul>
+          </div>
+          <div class="tab-content profile-tab-cont">
+             <div class="tab-pane fade show active" id="per_details_tab">
+                <div class="row">
+                   <div class="col-lg-12">
+                      <div class="card">
+                         <div class="card-body">
+                            <h5 class="card-title d-flex justify-content-between">
+                               <span>Personal Details</span>
+
+                              {% if user.is_authenticated %}
+                              {% if user.user_type == "4" %}                              
+                              {% else %}
+                               <a class="edit-link"  href="/user_profile_edite/{{user.username}}/"><i class="far fa-edit mr-1"></i>Edit</a>
+                              {% endif %}
+                              {% endif %}
+
+                            </h5>
+                            <div class="row">
+                               <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
+                               <p class="col-sm-9"><span>{{user.first_name}}</span> <span>{{user.last_name}}</span> </p>
+                            </div>
+                            
+                            <div class="row">
+                               <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Email ID</p>
+                               <p class="col-sm-9"><a href="https://preschool.dreamguystech.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="711b1e191f151e14311409101c011d145f121e1c">{{user.email}}</a></p>
+                            </div>
+                            <div class="row">
+                               <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Mobile</p>
+                               <p class="col-sm-9">{{user.mobile_number}}</p>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div id="password_tab" class="tab-pane fade">
+                <div class="card">
+                  {% if user.is_authenticated %}
+                   <div class="card-body">
+                      <h5 class="card-title">Change Password</h5>
+                      <div class="row">
+                         <div class="col-md-10 col-lg-6">
+
+
+
+
+                            <form action = "{% url 'change_password' %}" method="post" >
+                              {% csrf_token %}
+
+                               <div class="form-group">
+                                  <label>Old Password</label>
+                                  <input name="Old_pass" type="password" class="form-control">
+                               </div>
+
+                               <div class="form-group">
+                                  <label>New Password</label>
+                                  <input name="New_pass" type="password" class="form-control">
+                               </div>
+
+                               <div class="form-group">
+                                  <label>Confirm Password</label>
+                                  <input name="New_pass2" type="password" class="form-control">
+                               </div>
+
+                               <div class="form-group" style="display: none;">
+                                 <label>User</label>
+                                 <input name="User" type="text" name = "User" value="{{user.id}}" class="form-control">
+                              </div>
+
+                               <button class="btn btn-primary" type="submit">Save Changes</button>
+                            </form>
+
+
+
+                         </div>
+                      </div>
+                   </div>
+                   {% endif %}
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+
+
+
+{% endblock %}

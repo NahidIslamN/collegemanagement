@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+
+{% block start %}
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Update a Post</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Posts</a></li>
+    <li class="breadcrumb-item active">Update a Post</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+
+
+
+    
+    <form method="post", enctype="multipart/form-data" >
+        {% include "included/messages.html" %}
+    {% csrf_token %}
+
+    <div class="row">
+
+        <div class="col-12">
+            <h5 class="form-title"><span>Post Details</span></h5>
+        </div>
+        
+        
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input value="{{Post.Post_title}}" name="Post_title" type="text" class="form-control">
+                </div>
+            </div>
+        
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Discriptons</label>
+                    <textarea class="form-control"  name="Post_Discription"  cols="30" rows="10">{{Post.Post_Discription}}</textarea>
+                </div>
+            </div>
+ 
+ 
+
+    <div class="col-12">
+        <div class="form-group">
+        <label>Images</label>
+        <input name="iamges" type="file" class="form-control">
+        </div>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">UPDATE</button>
+    </div>
+     </div>
+    </form>
+    </div>
+    </div>
+    </div>
+     </div>
+    </div>
+    
+
+{% endblock %}

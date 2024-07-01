@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+
+{% block start %}
+
+{% if user.user_type == "5" or user.user_type == "2" or user.user_type == "1" %}
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Add Notices</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Notices</a></li>
+    <li class="breadcrumb-item active">Add Notices</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+
+
+
+    
+    <form method="post", enctype="multipart/form-data" >
+        {% include "included/messages.html" %}
+    {% csrf_token %}
+
+    <div class="row">
+
+        <div class="col-12">
+            <h5 class="form-title"><span>Notice Details</span></h5>
+        </div>
+        
+        
+            <div class="col-12 d-none">
+                <div class="form-group">
+                    <input value="{{user.id}}" name="NoticeCreatorId" type="text" class="form-control">
+                </div>
+            </div>
+
+         <div class="col-12">
+                <div class="form-group">
+                    <label>Expair Date</label>
+                    <input required name="Expair" type="date" class="form-control">
+                </div>
+        </div>    
+
+
+    <div class="col-12">
+        <div class="form-group">
+        <label>Select Notice File</label>
+        <input name="Notice_file" required type="file" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">ADD</button>
+    </div>
+     </div>
+    </form>
+    </div>
+    </div>
+    </div>
+     </div>
+    </div>
+
+
+{% endif %}
+    
+
+{% endblock %}

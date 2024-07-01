@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+
+{% block start %}
+
+
+{% if user.user_type == "1" %}
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Teachers</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/user_home_page/">Dashboard</a></li>
+                <li class="breadcrumb-item active">Teachers</li>
+             </ul>
+          </div>
+          <div class="col-auto text-right float-right ml-auto">
+             <a href="#" class="btn btn-outline-primary mr-2"> Total not aproval Teacher : {{TC}}</a>
+            
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+
+
+                   <table class="table table-hover table-center mb-0 datatable">
+
+
+                    
+
+                      <thead>
+                         <tr>
+                            <th>SL No</th>
+                            <th>Teacher Name</th>
+                            <th>DEP</th>
+                        
+                            <th>Gender</th>
+                            <th>Join Date</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                          
+                            <th class="text-right">Action</th>
+                         </tr>
+                      </thead>
+
+
+
+
+
+
+                      <tbody>
+
+                        {% if TSRS %}
+                        {% for y in TSRS %}
+                         <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>
+                               <h2 class="table-avatar">
+                                  <a href="#" class="avatar avatar-sm mr-2">
+                                    {% if y.admin.profile_pic %}
+                                    <img class="avatar-img rounded-circle" src="{{y.admin.profile_pic.url}}" alt="User Image">
+                                    {% else %}
+                                    <img class="avatar-img rounded-circle" src="/static/USERLOGO/USER.png" alt="User Image">
+                                    {% endif %}
+                                  </a>
+                                  <a href="#">{{y.admin.first_name}}</a>
+                               </h2>
+                            </td>
+                            <td>{{y.Dep_id}}</td>
+                            
+                            <td>{{y.Gender}}</td>
+                            <td>{{y.Join_date}}</td>
+                            <td>{{y.Mobile}}</td>
+                            <td>{{y.admin.email}}</td>
+        
+                            <td class="text-right">
+                               <div class="actions">
+                                  <a href="/aprove_a_techer/{{y.admin.id}}/" class="btn btn-success" >
+                                  aproved
+                                  </a>
+                                  <a href="/delete_teacher_information/{{y.admin.id}}/{{user.id}}/" class="btn btn-danger">
+                                  denied
+                                  </a>
+                               </div>
+                            </td>
+                         </tr> 
+                         {% endfor %}
+                         {% else %}
+                         <h5>Not added Yet</h5>
+                         {% endif %}
+                         
+                         
+
+                      </tbody>
+
+
+
+
+                   </table>
+
+
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+ {% endif %}
+
+{% endblock %}

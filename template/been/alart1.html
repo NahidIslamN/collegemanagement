@@ -1,0 +1,17 @@
+
+<script>
+    function handleAlertOk() {
+        window.history.back(); // Redirect to the previous page
+    }
+</script>
+
+
+
+<!-- HTML button to close the alert dialog -->
+<div>
+    <h1 style="text-align: center;">
+        {% include "included/messages.html" %}
+    </h1>
+
+    <div style="text-align: center;"><button style="text-align: center;width: 100px;color: green;" onclick="handleAlertOk()">OK</button></div>
+</div>

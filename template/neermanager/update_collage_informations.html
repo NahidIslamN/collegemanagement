@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+
+{% block start %}
+
+{% if user.user_type == "5" %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Update Collage</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Collage</a></li>
+    <li class="breadcrumb-item active">Update Collage</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+
+
+
+    
+    <form method="post", enctype="multipart/form-data" >
+        {% include "included/messages.html" %}
+
+    {% csrf_token %}
+
+    <div class="row">
+
+        <div class="col-12">
+            <h5 class="form-title"><span>Collage Details</span></h5>
+        </div>
+        
+  
+        
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Collage Discriptions</label>
+                    <textarea class="form-control"  name="Collge_Discrition"  cols="30" rows="5">{{TPI.Collge_Discrition}}</textarea>
+                </div>
+            </div>
+ 
+
+    <div class="col-12">
+        <div class="form-group">
+        <label>Collage Image</label>
+        <input name="Collage_Image" type="file" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">UPDATE</button>
+    </div>
+
+     </div>
+    </form>
+    </div>
+    </div>
+    </div>
+     </div>
+    </div>
+    
+{% endif %}
+{% endblock %}

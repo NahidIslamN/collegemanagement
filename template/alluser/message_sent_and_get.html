@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+
+
+ <div class="container">
+    <div class="row">
+        <div style="margin-left: auto;" class="col-12 mt-3 mb-2 p-5">
+            <h4>
+                <img class="avatar-img rounded-circle" src="{{sender.profile_pic.url}}" width="40px" alt="SenderImage">
+                <span>{{sender.first_name}}</span> <span>{{sender.last_name}}</span>
+            </h4>
+            <hr>
+            <div style="height: 350px; overflow-y: auto;" class="message-container">
+                {% if messages %}
+                    {% for x in messages %}
+                        <div class="message {% if x.from_sender == user %}sent{% else %}received{% endif %} w-50">
+                            <p>{{ x.message_text }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                <p style="text-align: center;">message get before</p>
+                {% endif %}
+            </div>
+
+
+
+
+            <div style="height: 120px; overflow-y: auto;" class="message-container" >
+
+
+                <form  method="post">
+                    {% csrf_token %}
+
+                    <input class="d-none" value="{{user.id}}" type="text" name="Sender_id" >
+                    <input class="d-none" value="{{sender.id}}" type="text" name="received_by" >
+
+                    <div class="form-group">
+                        <textarea class="form-control" name="message"  cols="30" rows="1"></textarea>
+                    
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100" >sent</button>
+                    
+                </form>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+{% endblock %}

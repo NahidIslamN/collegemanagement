@@ -1,0 +1,661 @@
+{% extends "base.html" %}
+
+{% load active_link_tags %}
+
+{% block start %}
+
+
+{% if user.user_type == "1" %}
+<div class="content container-fluid">
+
+    <div class="row mt-3">
+       <div class="col-xl-3 col-sm-6 col-12 d-flex">
+          <div class="card bg-one w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-user"></i>
+                   </div>
+                   <div class="db-info">
+                      <h5>{{user_count}}</h5>
+                      <h6>Members</h6>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="col-xl-3 col-sm-6 col-12 d-flex">
+          <div class="card bg-two w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-user-graduate"></i>
+                   </div>
+                   <div class="db-info">
+                      <h3>{{student_count}}</h3>
+                      <h6>Students</h6>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="col-xl-3 col-sm-6 col-12 d-flex">
+          <div class="card bg-three w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-building"></i>
+                   </div>
+                   <div class="db-info">
+                      <h3>{{dep_count}}</h3>
+                      <h6>Department</h6>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="col-xl-3 col-sm-6 col-12 d-flex">
+          <div class="card bg-four w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-user-graduate"></i>
+                   </div>
+                   <div class="db-info">
+                      <h3>{{graduate_students}}</h3>
+                      <h6>Graduate</h6>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+
+
+
+    
+    <div class="row">
+
+      
+      <div style="overflow: auto;" class="col-md-12">
+
+         <div class="card card-chart">
+            <div class="card-header">
+               <div class="row align-items-center">
+                  <div class="col-6">
+                     <h5 class="card-title">Number of Students</h5>
+                  </div>
+                  <div class="col-6">
+                     <ul class="list-inline-group text-right mb-0 pl-0">
+                        <li class="list-inline-item">
+                           <div class="form-group mb-0 amount-spent-select">
+                              
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="card-body">
+               <div id="chart3"></div>
+            </div>
+         </div>
+
+
+      </div>
+
+    </div>
+
+
+
+
+
+    <div class="row">
+
+
+
+       <div ty class="col-lg-6 col-md-12 col-sm-12 col-12">
+          <div style="height: 330px;" class="card card-chart">
+             <div class="card-header">
+                <div class="row align-items-center">
+                   <div class="col-6">
+                      <h5 class="card-title">User Distribution</h5>
+                   </div>
+                   <div class="col-6">
+                      <ul class="list-inline-group text-right mb-0 pl-0">
+                         <li class="list-inline-item">
+                            <div class="form-group mb-0 amount-spent-select">
+                            </div>
+                         </li>
+                      </ul>
+                   </div>
+                </div>
+             </div>
+             <div class="card-body">
+                <div id="chart"></div>
+             </div>
+          </div>
+       </div>
+
+
+
+
+
+       <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+          <div  style="height: 330px;" class="card card-chart">
+             <div class="card-header">
+                <div class="row align-items-center">
+                   <div class="col-6">
+                      <h5 class="card-title">Number of Students</h5>
+                   </div>
+                   <div class="col-6">
+                      <ul class="list-inline-group text-right mb-0 pl-0">
+                         <li class="list-inline-item">
+                            <div class="form-group mb-0 amount-spent-select">
+                            </div>
+                         </li>
+                      </ul>
+                   </div>
+                </div>
+             </div>
+             <div class="card-body">
+                <div id="bar2"></div>
+             </div>
+          </div>
+       </div>
+    </div>
+
+
+
+
+
+ </div>
+
+
+
+
+ {% elif user.user_type == "2" %}
+ <div class="content container-fluid">
+   <div class="row mt-3">
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-one w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-user"></i>
+                  </div>
+                  <div class="db-info">
+                     <h5>{{user_count}}</h5>
+                     <h6>Members</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-two w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-user-graduate"></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{student_count}}</h3>
+                     <h6>Students</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-three w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-building"></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{dep_count}}</h3>
+                     <h6>Department</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-four w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-user-graduate"></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{graduate_students}}</h3>
+                     <h6>Graduate</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+
+   <div class="row">
+
+      <div class="col-md-12">
+         <div class="card card-chart">
+            <div class="card-header">
+               <div class="row align-items-center">
+                  <div class="col-6">
+                     <h5 class="card-title">User Distribution</h5>
+                  </div>
+                  <div class="col-6">
+                     <ul class="list-inline-group text-right mb-0 pl-0">
+                        <li class="list-inline-item">
+                           <div class="form-group mb-0 amount-spent-select">
+
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="card-body">
+               <div id="chart2"></div>
+            </div>
+         </div>
+      </div>
+
+
+
+
+
+      <div style="overflow: auto;" class="col-md-12">
+         <div class="card card-chart">
+            <div class="card-header">
+               <div class="row align-items-center">
+                  <div class="col-6">
+                     <h5 class="card-title">Number of Students</h5>
+                  </div>
+                  <div class="col-6">
+                     <ul class="list-inline-group text-right mb-0 pl-0">
+                        <li class="list-inline-item">
+                           <div class="form-group mb-0 amount-spent-select">
+                             
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="card-body">
+               <div id="chart3"></div>
+            </div>
+         </div>
+      </div>
+
+
+
+
+   </div>
+
+</div>
+
+{% elif user.user_type == "3" %}
+<div class="content container-fluid">
+
+
+   <div class="row mt-3">
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-one w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-user"></i>
+                  </div>
+                  <div class="db-info">
+                     <h5>{{user_count}}</h5>
+                     <h6>Members</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-two w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-user-graduate"></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{student_count}}</h3>
+                     <h6>Students</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-three w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-building"></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{dep_count}}</h3>
+                     <h6>Department</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-four w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-user-graduate"></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{graduate_students}}</h3>
+                     <h6>Graduate</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+
+
+   <div class="row">
+      
+      <div style="overflow: auto;" class="col-md-12">
+         <div class="card card-chart">
+            <div class="card-header">
+               <div class="row align-items-center">
+                  <div class="col-6">
+                     <h5 class="card-title">Number of Students</h5>
+                  </div>
+                  <div class="col-6">
+                     <ul class="list-inline-group text-right mb-0 pl-0">
+                        <li class="list-inline-item">
+                           <div class="form-group mb-0 amount-spent-select">
+                             
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="card-body">
+               <div id="chart4"></div>
+            </div>
+         </div>
+      </div>
+
+     
+   </div>
+
+</div>
+
+{% elif user.user_type == "4" %}
+<div class="container-fluid">
+
+   
+<div class="content container-fluid">
+   <div class="row">
+      <div class="col-sm-12">
+      
+      <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+      <li class="breadcrumb-item active">Student Dashboard</li>
+      </ul>
+      </div>
+      </div>
+      </div>
+      
+      
+      <div class="row">
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+      <div class="card bg-nine w-100">
+      <div class="card-body">
+      <div class="db-widgets d-flex justify-content-between align-items-center">
+      <div class="db-icon">
+      <i class="fas fa-book-open"></i>
+      </div>
+      <div class="db-info">
+      <h3>04/06</h3>
+      <h6>All Courses</h6>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+      <div class="card bg-six w-100">
+      <div class="card-body">
+      <div class="db-widgets d-flex justify-content-between align-items-center">
+      <div class="db-icon">
+      <i class="fas fa-file-alt"></i>
+      </div>
+      <div class="db-info">
+      <h3>40/60</h3>
+      <h6>All Projects</h6>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+      <div class="card bg-ten w-100">
+      <div class="card-body">
+      <div class="db-widgets d-flex justify-content-between align-items-center">
+      <div class="db-icon">
+      <i class="fas fa-clipboard-list"></i>
+      </div>
+      <div class="db-info">
+      <h3>30/50</h3>
+      <h6>Test Attended</h6>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+      <div class="card bg-eleven w-100">
+      <div class="card-body">
+      <div class="db-widgets d-flex justify-content-between align-items-center">
+      <div class="db-icon">
+      <i class="fas fa-clipboard-check"></i>
+      </div>
+      <div class="db-info">
+      <h3>15/20</h3>
+      <h6>Test Passed</h6>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+
+
+      <div class="row">
+      
+         <div style="overflow: auto;" class="col-md-12">
+            <div class="card card-chart">
+               <div class="card-header">
+                  <div class="row align-items-center">
+                     <div class="col-6">
+                        <h5 class="card-title">Number of Students</h5>
+                     </div>
+                     <div class="col-6">
+                        <ul class="list-inline-group text-right mb-0 pl-0">
+                           <li class="list-inline-item">
+                              <div class="form-group mb-0 amount-spent-select">
+                                
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="card-body">
+                  <div id="chart4"></div>
+               </div>
+            </div>
+         </div>
+   
+        
+      </div>
+
+
+
+</div>
+{% elif user.user_type == "5" %}
+
+<div class="container-fluid">
+
+   <div class="row mt-3">
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-one w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-user"></i>
+                  </div>
+                  <div class="db-info">
+                     <h5>{{user_count}}</h5>
+                     <h6>Members</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-two w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-address-book"></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{total_post}}</h3>
+                     <h6>Total Posts</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-three w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-star"></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{total_mission}}</h3>
+                     <h6>Missions</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-four w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-comments"></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{pbulicmess}}</h3>
+                     <h6>FeedBacks</h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+   <div class="row">
+
+      <div style="overflow: auto;" class="col-lg-6 col-12">
+
+         <div class="card card-chart">
+            <div class="card-header">
+               <div class="row align-items-center">
+                  <div class="col-6">
+                     <h5 class="card-title">Home Component</h5>
+                  </div>
+                  <div class="col-6">
+                     <ul class="list-inline-group text-right mb-0 pl-0">
+                        <li class="list-inline-item">
+                           <div class="form-group mb-0 amount-spent-select">
+                              
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="card-body">
+               <div id="chartN"></div>
+            </div>
+         </div>         
+      </div>
+
+
+      <div style="overflow: auto; height: 470px;" class="col-12">
+
+         <div class="card card-chart">
+            <div class="card-header">
+               <div class="row align-items-center">
+                  <div class="col-6">
+                     <h5 class="card-title">Images</h5>
+                  </div>
+                  <div class="col-6">
+                     <ul class="list-inline-group text-right mb-0 pl-0">
+                        <li class="list-inline-item">
+                           <div class="form-group mb-0 amount-spent-select">
+                              
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="card-body">
+               <div id="chartB"></div>
+            </div>
+         </div>
+
+   </div>
+</div>
+
+{% else %}
+
+<div class="container-fluid">
+
+   <h5>Wait for Principal Aproval</h5>
+
+</div>
+
+{% endif %}
+
+{% include "included/chart.html" %}
+
+
+{% endblock %}

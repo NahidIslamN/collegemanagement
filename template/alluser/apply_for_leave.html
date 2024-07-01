@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+<div class="content container-fluid">
+
+    <div class="row align-items-center">
+        <div class="col">
+           <h3 class="page-title">Appy for leave</h3>
+           <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/user_home_page/">Dashboard</a></li>
+
+              <li class="breadcrumb-item active">Users</li>
+           </ul>
+        </div>
+
+     </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+
+
+
+    <form method="post">
+    {% csrf_token %}
+    <div class="row">
+    <div class="col-12">
+    <h5 class="form-title"><span>Subjects Details</span></h5>
+    {% include "included/messages.html" %}
+    </div>
+
+
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+        <label>Message</label>
+        <h4>MR. <span>{{admin.first_name}}</span> <span>{{admin.last_name}}</span> is appling</h4>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <div class="w-25" >
+                <a target="_blank" href="{{admin.profile_pic.url}}">
+                    <img class="w-100" src="{{admin.profile_pic.url}}" alt="Images">
+                </a>
+                
+            </div>
+        
+        </div>
+    </div>
+
+
+   
+    <div class="col-12">
+        <div class="form-group">
+        <label>Message</label>
+        <textarea required name="Message" cols="30" rows="3" class="form-control" ></textarea>
+        </div>
+    </div>
+
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+        <label>From</label>
+        <input required name="leavestart" type="date" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+        <label>To</label>
+        <input required name="leaveend" type="date" class="form-control">
+        </div>
+    </div>
+    
+
+
+
+    <div class="col-12">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </div>
+    </form>
+
+
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+{% endblock %}

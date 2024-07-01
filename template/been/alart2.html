@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPI Alart</title>
+</head>
+<body>
+
+    <script type="text/javascript">
+        function showAlertAndRedirect() {
+            // Display alert
+            alert("Are you sure you want to proceed with the published results?");
+    
+            // Redirect to URL after the user clicks "OK"
+            window.location.href = "/published_student/{{user.id}}/";
+        }
+
+        showAlertAndRedirect();
+    </script>
+
+    
+</body>
+</html>
+
+
+
+

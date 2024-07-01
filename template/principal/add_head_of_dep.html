@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+
+{% block start %}
+
+{% if user.user_type == "1" %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Add Head Of Dep</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Head Of Dep</a></li>
+    <li class="breadcrumb-item active">Add Head Of Dep</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+
+
+
+    
+    <form action="?action=get_teacher_informations" method="post", enctype="multipart/form-data" >
+        {% include "included/messages.html" %}
+    {% csrf_token %}
+
+    <div class="row">
+
+        <div class="col-12">
+            <h5 class="form-title"><span>Basic Details</span></h5>
+        </div>
+        
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input required name="first_name" type="text" class="form-control">
+                </div>
+            </div>
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input required name="last_name" type="text" class="form-control">
+                </div>
+            </div>
+        
+        
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input required name="username" type="text" class="form-control">
+                </div>
+            </div>
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Email ID</label>
+                    <input required name="email" type="email" class="form-control">
+                </div>
+            </div>
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Password</label>
+                    <input required name="Pass1" type="text" class="form-control">
+                </div>
+            </div>
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Repeat Password</label>
+                    <input required name="Pass2" type="text" class="form-control">
+                </div>
+            </div>
+
+
+    <div class="col-12 mt-3">
+    <h5 class="form-title"><span>Head of Dep Details</span></h5>
+    </div>
+
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Department</label>
+            <select name="Department" required class="form-control">
+            <option value="">Select Department</option>
+            {% for x in Dep %}
+            <option value="{{x.id}}" >{{x.Dep_Name}}</option>
+            {% endfor %}
+            </select>
+        </div>
+    </div>
+
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Gender</label>
+            <select name="Gender" required class="form-control">
+            <option value="">Select Gender</option>
+            <option value="Male" >Male</option>
+            <option value="Female">Female</option>
+            <option value="Custom" >Others</option>
+            </select>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Joining Date</label>
+            <input name="JoinDate" required type="date" class="form-control">
+        </div>
+    </div>
+
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+        <label>Date of Birth</label>
+        <input name="date_of_birth" required type="date" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+        <label>Mobile</label>
+        <input required name="mobile" maxlength="11" type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+        <label>Images</label>
+        <input name="iamges" required type="file" class="form-control">
+        </div>
+    </div>
+    <div class="col-12">
+
+
+
+        {% if user.user_type == "1" %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        {% else %}
+        <button  class="btn btn-primary disabled">Submit</button>
+        {% endif %}
+
+
+
+
+    </div>
+     </div>
+    </form>
+    </div>
+    </div>
+    </div>
+     </div>
+    </div>
+
+
+{% endif %}
+    
+
+{% endblock %}

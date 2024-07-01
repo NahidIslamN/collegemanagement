@@ -1,0 +1,93 @@
+{% extends "neer_page.html" %}
+
+
+
+{% block start %}
+
+<section>
+    <div class="mt-5">
+        .
+    </div>
+    
+    <div class="container">
+
+        <div class="row">
+          <div class="col-lg-6 mt-5">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-center shadow-lg p-5">
+                 <div>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.8350831720822!2d88.44041167440783!3d26.038951497095102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e4eb618da025ab%3A0x95cf23c7ca0cb9e3!2sThakurgaon%20Polytechnic%20Institute!5e0!3m2!1sen!2sbd!4v1710318156349!5m2!1sen!2sbd" width="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                 </div>
+                    <!-- <h1><i class="fa-solid fa-location-dot"></i></h1> -->
+
+                  <h3 >Our Address</h3>
+                  <p>{{Cinfo.Address}}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6 mt-5">
+                <div class="shadow-lg p-5">
+                  
+                  <h3> <i class="fa-solid fa-envelope"></i> Email Us</h3>
+                  <p>{{Cinfo.tip_email_1}}<br>{{Cinfo.tip_email_2}}</p>
+                </div>
+              </div>
+              <div class="col-md-6 mt-5">
+                <div class="shadow-lg p-5">                    
+                  <h3><i class="fa-solid fa-phone-volume"></i> Call Us</h3>
+                  <p>{{Cinfo.tip_phone_1}}<br>{{Cinfo.tip_phone_2}}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+          <div  class="col-lg-6  shadow-lg mt-5 text-center p-3" >
+            <form method="post" >
+              {% csrf_token %}
+              <div class="row mt-5">
+                <div class="col-md-6 form-group">
+                  <input style="height: 40px; font-size: 16px; padding: 15px; width: 100%;" type="text" name="name" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input style="height: 40px; font-size: 16px; padding: 15px; width: 100%;" type="email" class="form-control" name="email"  placeholder="Your Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-5">
+                <input style="height: 40px; font-size: 16px; padding: 15px; width: 100%;" type="text" class="form-control" name="subject"  placeholder="Subject" required>
+              </div>
+              <div class="form-group mt-5">
+                <textarea style="font-size: 16px;" class="form-control" name="message" rows="4" placeholder="Message" required></textarea>
+              </div>
+              <div class="my-3">
+                {% if messages %}
+                {{message.tags}} 
+                <div class="sent-message">
+                  {% for message in messages %}
+                  {{message}}
+                  {% endfor %}
+                </div>
+                {% endif %}
+
+              </div>
+              <div class="text-center"><button class="btn bg-primary mt-5" type="submit">Send Feedback</button></div>
+            </form>
+          </div>
+
+
+
+
+        </div>        
+
+      </div>
+
+</section>
+
+
+
+
+{% endblock %}

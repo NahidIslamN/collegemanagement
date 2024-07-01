@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block start %}
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Headof Departments</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/user_home_page/">Dashboard</a></li>
+                <li class="breadcrumb-item active">Head of Deparmtnet</li>
+             </ul>
+          </div>
+
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+
+
+                   <table class="table table-hover table-center mb-0 datatable">
+
+
+                    
+
+                      <thead>
+                         <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Department Name</th>
+                            <th>Mobile</th>
+                            <th>Joining Date</th>
+                            <th class="text-right">Action</th>
+                         </tr>
+                      </thead>
+
+
+
+
+
+
+                      <tbody>
+
+                        {% for y in Dep_head_data %}
+                         <tr>
+                            <td>{{y.admin.username}}</td>
+
+                            <td>
+                               <h2 class="table-avatar">
+
+                                  <a href="student-details.html" class="avatar avatar-sm mr-2">
+                                    {% if y.admin.profile_pic %}
+                                    <img class="avatar-img rounded-circle" src="{{y.admin.profile_pic.url}}" alt="User Image">
+                                    {% else %}
+                                    <img class="avatar-img rounded-circle" src="/static/USERLOGO/USER.png" alt="User Image">
+                                    {% endif %}
+                                  </a>
+
+                                  <a href="#"> <span>{{y.admin.first_name}}</span> <span>{{y.admin.last_name}}</span> </a>
+                               </h2>
+                            </td>
+
+                            <td>{{y.Dep_id}}</td>
+                            <td>{{y.Mobile}}</td>
+                            <td>{{y.Join_date}}</td>
+                            <td class="text-right">
+                               <div class="actions">
+
+                                 {% if user.user_type == "1" %}
+
+                                 <a href="/update_head_of_department/{{y.admin.id}}/" class="btn btn-sm bg-success-light mr-2">
+                                    <i class="fas fa-pen"></i>
+                                 </a>
+
+                                 <a href="/delete_head_of_department/{{y.admin.id}}/" class="btn btn-sm bg-danger-light">
+                                    <i class="fas fa-trash"></i>
+                                 </a>
+                                 
+                                 <a href="/message_sent_and_get/{{user.id}}/{{y.admin.id}}/" class="btn btn-sm bg-danger-light">
+                                    Sent Masseges
+                                 </a>
+
+                                 {% elif user.user_type == "2" or user.user_type == "3" or user.user_type == "4" or user.user_type == "5" %}
+
+                                 <a href="/message_sent_and_get/{{user.id}}/{{y.admin.id}}/" class="btn btn-sm bg-danger-light">
+                                    Sent Masseges
+                                 </a>
+
+                                 {% else %}
+
+                                 <a href="#" class="btn btn-sm bg-success-light disabled mr-2">
+                                    <i class="fas fa-pen"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm bg-danger-light disabled">
+                                    <i class="fas fa-trash"></i>
+                                 </a>
+                                 
+                                 {% endif %}
+
+
+
+                               </div>
+                            </td>
+                         </tr>
+                         {% endfor %}
+
+                      </tbody>
+
+
+
+
+                   </table>
+
+
+
+                </div>
+                
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end mt-3">
+         {% if Dep_head_data.has_previous %}
+          <li class="page-item">
+                <a class="page-link" href="/list_of_dephead/?page=1"  >First</a>
+          </li>
+
+          <li class="page-item">
+            <a class="page-link" href="?page={{Dep_head_data.previous_page_number}}" tabindex="-1">Previous</a>
+          </li>
+         {% else %}
+         <li class="page-item">
+            <a class="page-link disabled" href="#"  >First</a>
+         </li>
+
+         <li class="page-item">
+                <a class="page-link disabled" href="#" tabindex="-1">Previous</a>
+         </li>
+         {% endif %}
+         
+         {% for p in totalpage_list %}
+          <li class="page-item"><a class="page-link" href="?page={{p}}">{{p}}</a></li>
+         {% endfor %}
+
+      
+          {% if Dep_head_data.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{Dep_head_data.next_page_number}}" >Next</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{last_page}}" >Last</a>
+          </li>
+          {% else %}
+          <!-- None -->
+          {% endif %}
+        </ul>
+    </nav>
+
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+
+{% endblock %}

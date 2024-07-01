@@ -1,0 +1,359 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+{% if user.user_type == "2" %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Add Teachers</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Teachers</a></li>
+    <li class="breadcrumb-item active">Add Teachers</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+
+
+
+
+
+
+        {% include "included/messages.html" %}
+
+    {% if action is None %}        
+    <form action="?action=get_teacher_informations" method="post", enctype="multipart/form-data" >
+    {% csrf_token %}
+    <div class="row">
+        
+
+
+
+        <div class="col-12">
+            <h5 class="form-title"><span>Basic Details</span></h5>
+            </div>
+        
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input required name="first_name" type="text" class="form-control">
+                </div>
+            </div>
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input required name="last_name" type="text" class="form-control">
+                </div>
+            </div>
+        
+        
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input required name="username" type="text" class="form-control">
+                </div>
+            </div>
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Email ID</label>
+                    <input required name="email" type="email" class="form-control">
+                </div>
+            </div>
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Password</label>
+                    <input required name="Pass1" type="text" class="form-control">
+                </div>
+            </div>
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Repeat Password</label>
+                    <input required name="Pass2" type="text" class="form-control">
+                </div>
+            </div>
+        
+            
+
+
+    <div class="col-12 mt-3">
+    <h5 class="form-title"><span>Techers Details</span></h5>
+    </div>
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Department</label>
+            <select name="Department" required class="form-control">
+            <option value="{{Dep_id.id}}" >{{Dep_id.Dep_Name}}</option>            
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Shift</label>
+            <select name="Shift" required class="form-control">
+            <option value="" >Select Shift</option>
+            {% for y in Shifts %}
+            <option value="{{y.id}}" >{{y.Shift_ID}}</option>
+            {% endfor %}
+
+            </select>
+        </div>
+    </div>
+
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Gender</label>
+            <select name="Gender" required class="form-control">
+            <option value="">Select Gender</option>
+            <option value="Male" >Male</option>
+            <option value="Female">Female</option>
+            <option value="Custom" >Others</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+
+
+<!-- else part else part else part else part else part else part else part else part else part else part else part else part -->
+    {% else %} 
+
+
+
+ 
+    <form action="{% url 'save_teacher' %}" method="post" enctype="multipart/form-data" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="row">
+    
+    
+    
+            <div class="col-12">
+                <h5 class="form-title"><span>Basic Details</span></h5>
+                </div>
+            
+            
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input required value="{{data.first_name}}" name="first_name" type="text" class="form-control">
+                    </div>
+                </div>
+            
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input required value="{{data.last_name}}" name="last_name" type="text" class="form-control">
+                    </div>
+                </div>
+            
+            
+            
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input required value="{{data.username}}" name="username" type="text" class="form-control">
+                    </div>
+                </div>
+            
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label>Email ID</label>
+                        <input required value="{{data.email}}" name="email" type="email" class="form-control">
+                    </div>
+                </div>
+            
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input required value="{{data.Pass1}}" name="Pass1" type="text" class="form-control">
+                    </div>
+                </div>
+            
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label>Repeat Password</label>
+                        <input required value="{{data.Pass2}}" name="Pass2" type="text" class="form-control">
+                    </div>
+                </div> 
+    
+    
+        <div class="col-12 mt-3">
+        <h5 class="form-title"><span>Techers Details</span></h5>
+        </div>
+    
+        <div class="col-12 col-sm-6">
+            <div class="form-group">
+                <label>Department ID</label>
+                <input required value="{{data.Department}}" name="Department" type="text" class="form-control">
+            </div>
+        </div>
+    
+    
+
+        <div class="col-12 col-sm-6">
+            <div class="form-group">
+                <label>Shift ID</label>
+                <input required value="{{data.Shift}}" name="Shift" type="text" class="form-control">
+            </div>
+        </div>
+    
+
+
+        <div class="col-12 col-sm-6">
+            <div class="form-group">
+                <label>Gender</label>
+                <input required value="{{data.Gender}}" name="Gender" type="text" class="form-control">
+            </div>
+        </div>
+    
+    
+    
+    
+        <div class="col-12 col-sm-6">
+            <div class="form-group">
+                <label>Joining Date</label>
+                <input name="JoinDate" required type="date" class="form-control">
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <input  name="date_of_birth" required type="date" class="form-control">
+            </div>
+        </div>
+    
+    
+        <div class="col-12 col-sm-6">
+            <div class="form-group">
+            <label>Mobile</label>
+            <input required name="mobile" maxlength="11" type="text" class="form-control">
+            </div>
+        </div>
+    
+        <div class="col-12">
+            <div class="form-group">
+            <label>Qualification</label>
+            <input name="qualifications" required class="form-control" type="text">
+            </div>
+        </div>
+    
+        <div class="col-12">
+            <div class="form-group">
+            <label>Experience</label>
+            <textarea required name="exprience" cols="30" rows="3" class="form-control"></textarea>
+           
+            </div>
+        </div>
+
+
+
+
+
+
+
+    <div class="col-12 mt-3 ">
+        <h5 class="form-title"><span>Subjects</span></h5>
+    </div>
+    
+    <div  class="form-check col-12">
+        {% for s in Sub %}
+        <input class="form-check-input" name="Subjects" type="checkbox" value="{{s.id}}"  id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+          {{s.Subjects_Name}}
+        </label>
+        <br>
+        <br>
+ 
+        {% endfor %}      
+    </div>
+    
+
+
+    <div class="col-12 mt-3">
+    <h5 class="form-title"><span>Address</span></h5>
+    </div>
+
+    <div class="col-12">
+        <div class="form-group">
+            <label>Address</label>
+            <textarea required class="form-control"  name="address" id="" cols="30" rows="2"></textarea>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>State</label>
+            <input required name="state" type="text" class="form-control">
+        </div>
+    </div>
+
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>District</label>
+            <input required name="district" type="text" class="form-control">
+        </div>
+    </div>
+
+
+    <div class="col-12">
+        <div class="form-group">
+            <label>Country</label>
+            <input required name="country" type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+        <label>Image</label>
+        <input required name="Image" class="form-control" type="file">
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+        <label>Added By</label>
+        <input required name="add_by" class="form-control" value="{{user.username}}" type="text">
+        </div>
+    </div>
+
+
+
+
+    <div class="col-12">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    {% endif %}
+{% endif %}
+
+{% endblock %}

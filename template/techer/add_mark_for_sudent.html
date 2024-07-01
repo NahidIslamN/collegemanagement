@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+{% if user.user_type == "3" %}
+
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Add Marks</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Marks</a></li>
+    <li class="breadcrumb-item active">Add Marks</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+
+    {% if action is None %}
+     
+    <form action="?action=get_attendance_info" method ="post", enctype="multipart/form-data" >
+    {% csrf_token %}
+    <div class="row">
+
+
+
+        <div class="col-12">
+            {% include "included/messages.html" %}
+            <h5 class="form-title"><span>Basic Details</span></h5>
+         </div>
+        
+        
+
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Semester</label>
+                    <select name="Semester" required class="form-control">
+                    <option value="" >Select Semester</option> 
+                    
+                    {% for x in Semesters %}
+                    <option value="{{x.id}}" >{{x.Semester_ID}}</option> 
+                    {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+
+            
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Group</label>
+                    <select name="Group" required class="form-control">
+                    <option value="" >Select Group</option> 
+                    
+                    {% for y in Groups %}
+                    <option value="{{y.id}}" >{{y.Group_ID}}</option> 
+                    {% endfor %}
+
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Shift</label>
+                    <select name="Shift" required class="form-control">
+                    <option value="" >Select Shift</option>
+                                        
+                    {% for a in Shift_id %}
+                    <option value="{{a.id}}" >{{a.Shift_ID}}</option> 
+                    {% endfor %}
+                    
+                    </select>
+                </div>
+            </div>
+
+
+
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Subject</label>
+                    <select name="Subject" required class="form-control">
+                    <option value="" >Select Subjects</option>
+                                        
+                    {% for z in SubjectSSS %}
+                    <option value="{{z.id}}" >{{z.Subjects_Name}}</option> 
+                    {% endfor %}
+                    
+                    </select>
+                </div>
+            </div>
+        
+     
+
+
+    <div class="col-12">
+    <button type="submit" class="btn btn-primary">Face Student</button>
+    </div>
+    </div>
+    </form>
+
+
+
+
+<!-- Else part -->
+
+
+
+
+    {% else %}         
+    <form  method ="post" >
+        {% csrf_token %}
+        <div class="row">
+    
+    
+    
+            <div class="col-12">
+                {% include "included/messages.html" %}
+                <h5 class="form-title"><span>Basic Details</span></h5>
+             </div>
+            
+            
+
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Semester</label>
+                    <select name="Semester" required class="form-control">
+                    <option value="{{Semesters_ids.id}}" >{{Semesters_ids.Semester_ID}}</option> 
+                    </select>
+                </div>
+            </div>
+
+
+            
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Group</label>
+                    <select name="Group" required class="form-control">
+                    <option value="{{group_id.id}}" >{{group_id.Group_ID}}</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Shift</label>
+                    <select name="Shift" required class="form-control"> 
+                    <option value="{{shift_id.id}}" >{{shift_id.Shift_ID}}</option> 
+                    </select>
+                </div>
+            </div>
+
+
+
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Subject</label>
+                    <select name="Subject" required class="form-control"> 
+                    <option value="{{sub_id.id}}" >{{sub_id.Subjects_Name}}</option>      
+                    
+                    </select>
+                </div>
+            </div>
+
+
+
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Mark Adding by</label>
+                    <select name="Creator" required class="form-control"> 
+                    <option value="{{admins.id}}" > <span>{{user.first_name}}</span> <span>{{user.last_name}}</span> </option>  
+                    </select>
+                </div>
+            </div>
+
+
+
+
+
+
+            <hr style="width: 100%; height: 2px; color: black;">
+             
+
+         
+    
+    
+        <div class="col-12">
+            <button type="button" class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#exampleModal">
+                ADD
+              </button>
+        </div>
+        </div>
+        </form>
+
+
+        <!-- Modal Modal Modal Modal -->
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Mark Entry From</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+
+
+
+                <div class="modal-body">
+
+
+
+                    <form action="/save_marks_info/{{user.id}}/" method ="post" >
+                        {% csrf_token %}
+                        <div class="row">  
+                
+                             <div class="col-12">
+                                <div class="form-group">
+                                    <label>Semester</label>
+                                    <select name="Semester" required class="form-control">
+                                    <option value="{{Semesters_ids.id}}" >{{Semesters_ids.Semester_ID}}</option> 
+                                    </select>
+                                </div>
+                            </div>    
+                
+                
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Subject</label>
+                                    <select name="Subject" required class="form-control"> 
+                                    <option value="{{sub_id.id}}" >{{sub_id.Subjects_Name}}</option>      
+                                    
+                                    </select>
+                                </div>
+                            </div>
+                
+                
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Student</label>
+                                    <select name="Student" required class="form-control">
+                                    <option value="">Select Student</option>
+                                    {% for x in Studentsss %}
+                                    <option value="{{x.id}}" >{{x.id}} <span>{{x.admin.first_name}}</span> <span>{{x.admin.last_name}}</span> </option> 
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>TC Mark</label>
+                                    <input required name="TC_Mark" min="0" max="90" type="number" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>PC Mark</label>
+                                    <input required name="PC_Mark" min="0" max="110" type="number" class="form-control">
+                                </div>
+                            </div>  
+                
+                    
+                    
+                        <div class="col-12">
+
+                            <button class="btn btn-primary" type="submit">Submit</button>
+
+                        </div>
+                        </div>
+                        </form>
+
+
+                        
+
+
+                  
+                </div>
+
+
+
+
+
+
+
+                <div class="modal-footer">
+
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+    {% endif %}
+
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+{% endif %}
+
+
+{% endblock %}

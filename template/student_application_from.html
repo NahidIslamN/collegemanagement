@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>tpi.govt.bd|Education</title>
+    <link rel="shortcut icon" href="/static/USERLOGO/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
+    <link rel="stylesheet" href="/static/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/static/assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+</head>
+<body>
+
+    <div class="container-fluid col-10 mt-5 ms-auto me-auto">
+        <div class="content container-fluid">
+
+            <div class="container mb-3">
+                <h3 class="text-center card rounded-4 p-3"><b class="text-primary">Student Application From</b></h3>
+            </div>
+            
+            <div class="row">
+            <div class="col-sm-12">
+            <div class="card">
+            <div class="card-body">
+        
+        
+        
+        
+        
+        
+            {% include "included/messages.html" %}
+        
+            {% if action is None %}
+            <form action="?action=get_student_informations" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+                <div class="row">
+            
+            
+            
+                    <div class="col-12">
+                        <h5 class="form-title"><span>Basic Details</span></h5>
+                        </div>
+                    
+                    
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input required name="first_name" type="text" class="form-control">
+                            </div>
+                        </div>
+                    
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input required name="last_name" type="text" class="form-control">
+                            </div>
+                        </div>
+                    
+                    
+                    
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input placeholder="Enter Your Email" required name="username" type="email" class="form-control">
+                            </div>
+                        </div>
+                    
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input placeholder="Re-type Your Email" required name="email" type="email" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Create a Password</label>
+                                <input required name="Pass1" type="password" class="form-control">
+                            </div>
+                        </div>
+                    
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Repeat Password</label>
+                                <input required name="Pass2" type="password" class="form-control">
+                            </div>
+                        </div> 
+            
+        
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Mobile Number</label>
+                                <input required name="Mobile_phone" maxlength="11" type="text" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select name="Gender" required class="form-control">
+                                <option value="">Select Gender</option>
+                                <option value="Male" >Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Custom" >Others</option>
+                                </select>
+                            </div>
+                        </div>
+        
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input required  name="date_of_birth" type="date" class="form-control">
+                            </div>
+                        </div>
+        
+                        
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Religion</label>
+                                <select name="Religion" required class="form-control">
+                                <option value="">Select Religion</option>
+                                <option value="Islam" >Islam</option>
+                                <option value="Hinduism">Hinduism</option>
+                                <option value="Christians">Buddhism</option>
+                                <option value="Christians">Christians</option>
+                                <option value="Others" >Others</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+        
+            
+                <div class="col-12 mt-3">
+                <h5 class="form-title"><span>Institute Informations</span></h5>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label>Session</label>
+                        <select name="Session" required class="form-control">
+                        <option value="{{SessDefault.id}}" >{{SessDefault}}</option> 
+                        {% for s in Sessions %}
+                        <option value="{{s.id}}" >{{s}}</option> 
+                        {% endfor %}  
+        
+                        </select>
+                    </div>
+                </div>
+        
+                   
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select name="departments" required class="form-control">
+                                             
+                        <option value="{{Dep.id}}" >{{Dep.Dep_Name}}</option>                        
+        
+                        </select>
+                    </div>
+                </div>
+            
+            
+        
+        
+   
+          <!-- Semester Is Auto -->
+          <!-- Subject Auto -->
+
+          <!-- Group Auto -->
+        
+        
+        
+                <div class="col-12">
+                    <h5 class="form-title"><span>Parent Information</span></h5>
+                </div>
+                
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Father's Name</label>
+                    <input required name="father_name" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Father's Occupation</label>
+                    <input required Name = "father_ocupation" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Father's Mobile</label>
+                    <input required name="father_mobile" maxlength="11" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Father's Email</label>
+                    <input name="father_email" type="email" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Mother's Name</label>
+                    <input required name="mother_name" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Mother's Occupation</label>
+                    <input required name="mother_ocupation" type="text" class="form-control">
+                    </div>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Mother's Mobile</label>
+                    <input required name="mother_mobile" type="text" maxlength="11" class="form-control">
+                    </div>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Mother's Email</label>
+                    <input name="mother_email" type="email" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Present Address</label>
+                    <textarea required name="present_address" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Permanent Address</label>
+                    <textarea required name="permenent_address" class="form-control"></textarea>
+                    </div>
+                </div>
+        
+        
+                <div class="col-12">
+                    <h5 class="form-title"><span>Education Qualification</span></h5>
+                </div>
+        
+        
+          
+                    
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Exam Name</label>
+                    <input required name="Examination" maxlength="3" placeholder="SSC or HSC" type="text" class="form-control">
+                    </div>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Exam Roll</label>
+                    <input required name="examr_roll" maxlength="6" type="text" class="form-control">
+                    </div>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Exam Year</label>
+                    <input required name="exam_year" maxlength="4" type="text" class="form-control">
+                    </div>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>GPA</label>
+                    <input required name="Examresult" type="text" maxlength="4" class="form-control">
+                    </div>
+                </div>
+        
+        
+        
+        
+        
+            <div class="col-12">
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </div>
+            </div>
+            </form>
+
+
+
+
+            <!-- Elae Part Of the From Elae Part Of the From Elae Part Of the From Elae Part Of the From -->
+            {% else %}
+
+
+            <form action ="{% url 'save_student_info' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+                <div class="row">
+            
+            
+            
+                    <div class="col-12">
+                        <h5 class="form-title"><span>Basic Details</span></h5>
+                        </div>
+                    
+                    
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input value="{{data.first_name}}" required name="first_name" type="text" class="form-control">
+                            </div>
+                        </div>
+                    
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input value="{{data.last_name}}" required name="last_name" type="text" class="form-control">
+                            </div>
+                        </div>
+                    
+                    
+                    
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input value="{{data.username}}" placeholder="Enter Your Email" required name="username" type="email" class="form-control">
+                            </div>
+                        </div>
+                    
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input value="{{data.email}}" placeholder="Re-type Your Email" required name="email" type="email" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Create a Password</label>
+                                <input value="{{data.Pass1}}" required name="Pass1" type="password" class="form-control">
+                            </div>
+                        </div>
+                    
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Repeat Password</label>
+                                <input required value="{{data.Pass2}}" name="Pass2" type="password" class="form-control">
+                            </div>
+                        </div> 
+            
+        
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Mobile Number</label>
+                                <input value="{{data.Mobile_phone}}" maxlength="11" required name="Mobile_phone" type="text" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <input value="{{data.Gender}}"  class="form-control" name="Gender" type="text">
+            
+                            </div>
+                        </div>
+        
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input required value="{{data.date_of_birth}}"  name="date_of_birth" type="text" class="form-control">
+                            </div>
+                        </div>
+        
+                        
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Religion</label>
+                                <input name="Religion" class="form-control" value="{{data.Religion}}" type="text">
+                            </div>
+                        </div>
+                        
+        
+            
+                <div class="col-12 mt-3">
+                <h5 class="form-title"><span>Institute Informations</span></h5>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label>Session</label>
+                        <select name="Session" required class="form-control">
+                        <option value="{{SessDefault.id}}" >{{SessDefault}}</option> 
+                        {% for s in Sessions %}
+                        <option value="{{s.id}}" >{{s}}</option> 
+                        {% endfor %}  
+        
+                        </select>
+                    </div>
+                </div>
+        
+                   
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select name="departments" required class="form-control">
+                                             
+                        <option value="{{Dep.id}}" >{{Dep.Dep_Name}}</option>                        
+        
+                        </select>
+                    </div>
+                </div>
+            
+            
+            
+        
+          <!-- Semester Is Auto -->
+          <!-- Subject Auto -->
+
+          <!-- Group Auto -->
+        
+        
+        
+                <div class="col-12">
+                    <h5 class="form-title"><span>Parent Information</span></h5>
+                </div>
+                
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Father's Name</label>
+                    <input required value="{{data.father_name}}" name="father_name" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Father's Occupation</label>
+                    <input required value="{{data.father_ocupation}}" Name = "father_ocupation" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Father's Mobile</label>
+                    <input required value="{{data.father_mobile}}" maxlength="11" name="father_mobile" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Father's Email</label>
+                    <input value="{{data.father_email}}" name="father_email" type="email" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Mother's Name</label>
+                    <input required value="{{data.mother_name}}" name="mother_name" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Mother's Occupation</label>
+                    <input required value="{{data.mother_ocupation}}" name="mother_ocupation" type="text" class="form-control">
+                    </div>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Mother's Mobile</label>
+                    <input required value="{{data.mother_mobile}}" maxlength="11" name="mother_mobile" type="text" class="form-control">
+                    </div>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Mother's Email</label>
+                    <input value="{{data.mother_email}}" name="mother_email" type="email" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Present Address</label>
+                    <textarea required name="present_address" class="form-control">{{data.present_address}}</textarea>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Permanent Address</label>
+                    <textarea required name="permenent_address" class="form-control">{{data.permenent_address}}</textarea>
+                    </div>
+                </div>
+        
+        
+                <div class="col-12">
+                    <h5 class="form-title"><span>Education Qualification</span></h5>
+                </div>
+        
+        
+          
+                    
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Exam Name</label>
+                    <input required value="{{data.Examination}}" maxlength="3" name="Examination" type="text" class="form-control">
+                    </div>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Exam Roll</label>
+                    <input required value="{{data.examr_roll}}" maxlength="6" name="examr_roll" type="text" class="form-control">
+                    </div>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Exam Year</label>
+                    <input required value="{{data.exam_year}}" maxlength="4" name="exam_year" type="text" class="form-control">
+                    </div>
+                </div>
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>GPA</label>
+                    <input required value="{{data.Examresult}}" maxlength="4" name="Examresult" type="text" class="form-control">
+                    </div>
+                </div>
+
+
+
+                <div class="col-12">
+                    <h5 class="form-title"><span>Shift and Image</span></h5>
+                </div>
+
+
+                
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label>Shift</label>
+                        <select name="Shift" required class="form-control">
+                        <option value="" >Select Shift</option>
+                        {% for y in Shifts %}
+                        <option value="{{y.id}}" >{{y.Shift_ID}}</option>
+                        {% endfor %}
+            
+                        </select>
+                    </div>
+                </div>
+        
+        
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Student Image</label>
+                    <input required  type="file" name = "images" class="form-control">
+                    </div>
+                </div>
+        
+        
+        
+        
+        
+        
+            <div class="col-12">
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </div>
+            </div>
+            </form>
+
+
+
+            {% endif %}
+
+
+
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+    </div>
+
+
+    
+
+
+
+
+
+
+  
+    
+
+    <script src="/static/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="/static/assets/js/popper.min.js"></script>
+    <script src="/static/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/static/assets/plugins/apexchart/apexcharts.min.js"></script>
+    <script src="/static/assets/plugins/apexchart/chart-data.js"></script>
+    <script src="/static/assets/js/script.js"></script>
+</body>
+</html>
+
+
+
+
+
+

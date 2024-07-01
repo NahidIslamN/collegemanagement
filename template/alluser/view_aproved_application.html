@@ -1,0 +1,135 @@
+
+{% extends "base.html" %}
+
+
+{% block start %}
+<div class="content container-fluid">
+    <div class="page-header">
+
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Leving Applications</h3>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/user_home_page/">Dashboard</a></li>
+                <li class="breadcrumb-item active">Applications</li>
+             </ul>
+          </div>
+       </div>
+
+    </div>
+
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+
+                <div class="table-responsive">
+                   <table class="table table-hover table-center mb-0 datatable">            
+
+                      <thead>
+
+                         <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th class="text-right">Action</th>
+                         </tr>
+
+                      </thead>
+
+                      <tbody>
+
+                        {% for y in Application %}
+                         <tr>
+                            <td>{{y.admin.username}}</td>
+                            <td>
+                               <h2 class="table-avatar">
+                                  <a target="_blank" href="{{y.admin.profile_pic.url}}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{y.admin.profile_pic.url}}" alt="User Image"></a>
+                                  <a href="#">{{y.admin.first_name}}</a>
+                               </h2>
+                            </td>
+                            <td>{{y.Leave_start}}</td>
+                            <td>{{y.Leave_end}}</td>
+                            <td class="text-right">
+
+                               <div class="actions">
+
+                                 <button type="button" class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#exampleModal{{y.id}}">
+                                    Show Messages
+                                  </button>
+
+
+                               </div>
+                            </td>
+                         </tr>
+                         {% endfor %}
+
+                      </tbody>
+                   </table>
+                </div>
+
+
+
+
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+ 
+
+  <!-- Modal -->
+  {% for y in Application %}
+  <div class="modal fade" id="exampleModal{{y.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Application Modal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div style="height: 250px;" class="modal-body">
+            <p style="text-align: justify;">{{y.message}}</p>
+          
+        </div>
+        <div class="modal-footer">
+         {% if y.status == "0" %}
+         <a href="/aprove_a_applications/{{y.id}}/{{user.id}}/" class="btn btn-success" >Aproved</a>
+         {% else %}
+         <a href="#" class="btn btn-success disabled" >Aproved</a>
+         {% endif %}
+
+         {% if y.status == "0" %}
+         <a href="#" class="btn btn-primary" >Denied</a>
+         {% endif %}
+
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+

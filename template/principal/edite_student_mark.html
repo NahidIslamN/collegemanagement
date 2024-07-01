@@ -1,0 +1,74 @@
+
+{% extends "base.html" %}
+
+
+{% block start %}
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Edite Resluts</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Results</a></li>
+    <li class="breadcrumb-item active">View Reslut</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    
+    <div class="card">
+    <div class="card-body">
+    {% include "included/messages.html" %}
+    
+    <form method="post",>
+    {% csrf_token %}
+
+    <div class="row">
+
+        <div class="col-12">
+            <h5 class="form-title"><span>Result Details Details</span></h5>
+        </div>
+        
+        
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Student ID</label>
+                    <input required name="Student_ID" type="number" class="form-control">
+                </div>
+            </div>
+        
+    
+
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>Semester</label>
+                    <select name="Department" class="form-control">
+                    <option value="0">Select Semester</option>
+                    {% for x in Sem_ids %}
+                    <option value="{{x.id}}" >{{x.id}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            
+        
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+     </div>
+    </form>
+    </div>
+    </div>
+    </div>
+     </div>
+    </div>
+    
+
+{% endblock %}

@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+{% if user.user_type == "1" or user.user_type == "2" or user.user_type == "3" %}
+
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Subjects</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active">Subjects</li>
+             </ul>
+          </div>
+          <div class="col-auto text-right float-right ml-auto">
+             <a href="#" class="btn btn-outline-primary mr-2">Total Subjects : {{Subjectss}}</a>
+          </div>
+          
+
+       </div>
+    </div>
+
+
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="input-group col-11 mt-3 mb-2 ">
+         <input type="search" class="form-control rounded" name="search" placeholder="Search ..." aria-label="Search" aria-describedby="search-addon" />
+         <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+       </div>
+    </form>
+
+
+
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+
+                   <table class="table table-hover table-center mb-0 datatable">
+
+
+                    
+
+                      <thead>
+                         <tr>
+
+                            <th>ID</th>
+                            <th>Subject Name</th>
+                            <th>Department</th>
+
+                            <th class="text-right">Action</th>
+                         </tr>
+                      </thead>
+
+
+
+
+
+
+                      <tbody>
+                        {% for x in subjects %}
+                         <tr>
+                            <td>{{x.Sub_ID}}</td>
+                            <td>{{x.Subjects_Name}}</td>
+                            <td>{{x.Dep_ID}}</td>
+
+                            <td class="text-right">
+                               <div class="actions">
+                                 {% if user.user_type == "1" %}
+                                  <a href="/edite_subject/{{x.id}}/" class="btn btn-sm bg-success-light">
+                                  <i class="fas fa-pen"></i>
+                                  </a>
+                                  <a href="/delete_subjects/{{x.id}}/" class="btn btn-sm bg-danger-light">
+                                  <i class="fas fa-trash"></i>
+                                  </a>
+                                  {% else %}
+
+                                  <a href="#" class="btn btn-sm bg-success-light disabled">
+                                    <i class="fas fa-pen"></i>
+                                 </a>
+
+                                 <a href="#" class="btn btn-sm bg-danger-light disabled">
+                                    <i class="fas fa-trash"></i>
+                                 </a>
+
+                                  {% endif %}
+
+                               </div>
+                            </td>
+                         </tr>
+                         {% endfor %}                       
+                      </tbody>
+
+
+
+
+                   </table>
+
+
+                </div>
+
+                
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-end mt-4">
+       {% if subjects.has_previous %}
+        <li class="page-item">
+              <a class="page-link" href="/department_list/?page=1"  >First</a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" href="?page={{subjects.previous_page_number}}" tabindex="-1">Previous</a>
+        </li>
+       {% else %}
+       <li class="page-item">
+          <a class="page-link disabled" href="#"  >First</a>
+       </li>
+
+       <li class="page-item">
+              <a class="page-link disabled" href="#" tabindex="-1">Previous</a>
+       </li>
+       {% endif %}
+       
+       {% for p in totalpage_list %}
+        <li class="page-item"><a class="page-link" href="?page={{p}}">{{p}}</a></li>
+       {% endfor %}
+
+    
+        {% if subjects.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{subjects.next_page_number}}" >Next</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{last_page}}" >Last</a>
+        </li>
+        {% else %}
+        <!-- None -->
+        {% endif %}
+      </ul>
+  </nav>
+
+
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+
+
+ {% endif %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "neer_page.html" %}
+
+{% block start %}
+<div class="col-12 mb-4">
+    .
+</div>
+<div class="container mt-4 mb-5">
+    <div class="row">
+        <div class="col-12 mb-5 me-auto ms-auto">
+            <img class="w-100 shadow-lg" src="{{TPI.Collage_Image.url}}" alt="Collages">
+
+        </div>
+        <div style="text-align: justify;" class="col-12 me-auto ms-auto">
+            <h1><b>Wellcome to {{TPI.Collage_Name}}</b></h1>
+            <p>
+                {{TPI.Collge_Discrition|linebreaks}}
+            </p>
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endblock %}

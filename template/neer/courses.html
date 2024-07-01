@@ -1,0 +1,31 @@
+{% extends "neer_page.html" %}
+
+
+{% block start %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5">
+            <h1 class="text-center"><b>Thakurgaon Polytechnic Institute Courses</b></h1>
+            <p class="text-center" > <b>-----</b></p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% for y in courses %}
+        <div class="col-lg-8 col-sm-10 col-12 ms-auto me-auto mt-5 card shadow-lg p-3">
+            <img src="{{y.Dep_Image.url}}" alt="Images">
+            <h1 class="mt-3" class="text-center"><b>{{y.dep_name}}</b></h1> 
+            <p style="text-align: justify;">{{y.dep_description|slice:"0:500"}}</p>
+            <a target="_blank" class="btn btn-3 w-50 me-auto ms-auto btn-block shadow-lg mb-4"  href="/learn_mor_about_course/{{y.id}}/">Learn More ...</a>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock %}

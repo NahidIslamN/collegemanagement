@@ -1,0 +1,24 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* For dark background */
+.dark-bg {
+    background-color: #333; /* Example dark background color */
+    color: #fff; /* Example light text color */
+}
+
+/* Style for links */
+.dark-bg a {
+    color: #fff; /* Default link color */
+    text-decoration: none; /* Remove default underline */
+}
+
+/* Style for link hover */
+.dark-bg a:hover {
+    color: #ff0; /* Lighter color for hover */
+}
+
+

@@ -1,0 +1,159 @@
+{% extends "neer_page.html" %}
+
+{% block start %}
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+      {% for slide in index_slider %}
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %} class="active" {% endif %}></button>
+      {% endfor %}
+  </div>
+  <div class="carousel-inner">
+      {% for slide in index_slider %}
+      <div class="carousel-item {% if forloop.first %} active {% endif %}">
+          <img src="{{ slide.slide_image.url }}" class="d-block w-100" alt="carouselImage">
+          <div class="carousel-caption d-none d-md-block">
+              <h2 style="background-color: #228B22; opacity: 0.7; border-radius: 10px;" class="text-white p-3 w-50 ms-auto me-auto">{{ slide.Slide_Title }}</h2>
+              <div style="background-color: #333333; border-radius: 20px; opacity: 0.8;" class="text-white p-3 w-75 ms-auto me-auto shadow-lg">{{ slide.Slide_discription }}</div>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<script src="/static/myassets/scripts.js" ></script>
+
+
+
+  <div class="conteiner col-11 me-auto ms-auto mt-5 mb-5">
+
+
+    <div class="row">
+
+      <div class="col-lg-3 col-sm-6 me-auto ms-auto shadow-lg mb-5">
+        {% if principal.BasicInfo.profile_pic %}
+        <img class="w-100"  src="{{principal.BasicInfo.profile_pic.url}}" alt="Principal">
+        {% else %}
+        <img class="w-100" src="/static/USERLOGO/USER.png" alt="Principal">
+        {% endif %}
+        <h2 class="mt-5">Principal</h2>
+        <h3 class="mt-3" ><span>{{principal.BasicInfo.first_name}}</span> <span>{{principal.BasicInfo.last_name}}</span> </h3>
+
+      </div>
+
+      <div style="text-align: justify;" class="col-lg-8 col-sm-12 shadow-lg p-2 mb-5">
+       <span>{{dis|linebreaks}}</span>
+
+       <a target="_blank" href="/learn_more_principal/" class="btn w-100">learn more ...</a>
+
+      </div>  
+</div>
+
+    </div>
+
+<!-- End principal sections -->
+
+
+<!-- Department Head Sections -->
+
+
+<div class="container">
+  <div class="row">
+    {% for y in DipHead %}
+    <div class="col-lg-4 col-sm-6 col-12 card  mb-5">
+      {% if y.admin.profile_pic %}
+      <img class="w-75 ms-auto me-auto"  src="{{y.admin.profile_pic.url}}" alt="Principal">
+      {% else %}
+      <img class="w-75 ms-auto me-auto" src="/static/USERLOGO/USER.png" alt="Principal">
+      {% endif %}
+      <h2 class="mt-5" > Name : <span>{{y.admin.first_name}}</span> <span>{{y.admin.last_name}}</span></h2>
+      <p>Designation : HOD ({{y.Dep_id}})</p>
+      <p>Contuct : {{y.admin.mobile_number}} </p>
+      <p>Email : {{y.admin.email}}</p>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="row shadow-lg mb-5 bg-white-light">
+    <div class="col-12 mt-5">
+      <h1 class="text-center"><b>Thakurgaon Polytechinc Institute In Number</b></h1>
+      <h1 class="text-center text-danger"><span><sup>-----</sup></span></h1>
+    </div>
+
+
+    <div class="col-lg-3 col-sm-3 col-12 card rounded-circle shadow-lg mb-5">
+      <img class="img-fluid w-25 ms-auto me-auto" src="/static/USERLOGO/num1.png" alt="Images">
+      <h4 class="text-center mt-3 mb-3">Founded</h4>
+      <h1 class="text-center">2004</h1>
+    </div>
+
+    <div class="col-lg-3 col-sm-3 col-12 card rounded-circle shadow-lg mb-5">
+      <img class="img-fluid w-25 ms-auto me-auto" src="/static/USERLOGO/num2.png" alt="Images">
+      <h4 class="text-center mt-3 mb-3">Total Members</h4>
+      <h1 class="text-center">{{total_member}}</h1>
+    </div>
+
+    <div class="col-lg-3 col-sm-3 col-12 card rounded-circle shadow-lg mb-5">
+      <img class="img-fluid w-25 ms-auto me-auto" src="/static/USERLOGO/num3.png" alt="Images">
+      <h4 class="text-center mt-3 mb-3">Total Student</h4>
+      <h1 class="text-center">{{total_student}}</h1>
+    </div>
+
+    <div class="col-lg-3 col-sm-3 col-12 card rounded-circle shadow-lg mb-5">
+      <img class="img-fluid w-25 ms-auto me-auto" src="/static/USERLOGO/num4.png" alt="Images">
+      <h4 class="text-center mt-3 mb-3">Total Subjects</h4>
+      <h1 class="text-center">{{total_sub}}</h1>
+    </div>
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+<div class="container">
+  <div class="row shadow-lg mb-5">
+    <div class="col-12 mt-5">
+      <h1 class="text-center"><b>Letest News</b></h1>
+      <h1 class="text-center text-danger"><span><sup>-----</sup></span></h1>
+    </div>
+
+    {% for CN in Current_news %}
+    <div style="height: 500px; overflow: auto;" class="col-lg-6 col-12 card rounded-4 shadow-lg mb-5 ">
+      <a href="/learn_more_about_block/{{CN.id}}/"><img class="img-fluid w-100" src="{{CN.Post_image.url}}" alt="Images"></a>
+      <h4 class="text-center mt-3 mb-3">{{CN.Post_title}}</h4>
+      <div class="mb-3" style="text-align: justify;"  >
+        <p >{{CN.Post_Discription|linebreaks|slice:"0:250"|safe}}</p>
+        <a target="_blank" class="btn-success p-2 rounded-4 mb-3 ms-auto" href="/learn_more_about_block/{{CN.id}}/">Learn More ...</a>
+
+      </div>
+
+    </div>
+
+    {% endfor %}
+
+    
+  </div>
+</div>
+
+
+
+{% endblock %}

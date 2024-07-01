@@ -1,0 +1,206 @@
+{% extends "neer_page.html" %}
+
+
+{% block start %}
+
+<div class="container">
+    <div class="mt-5">.</div>
+
+    <div class="row">
+    
+
+
+        <div class="col-lg-7 col-sm-12 me-auto ms-auto pt-4">
+            <form method="post">
+                {% csrf_token %}
+        
+                <div class="input-group">
+                    <input type="text" name="Search" class="form-control" placeholder="Search" style="font-size: 18px; color: #333;" />
+                    <button type="submit" class="btn bg-primary" style="font-size: 18px;">
+                        <i class="fas fa-search"></i> <!-- Font Awesome search icon -->
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        
+        
+    
+
+
+
+
+        {% for bp in BPS %}
+
+        <!-- Post Sections -->
+
+
+        <div style="text-align: justify;" class="col-lg-7 me-auto ms-auto col-sm-12 pt-5">
+            <a target="_blank" href="/learn_more_about_block/{{bp.id}}/"><img class="img-fluied w-100" src="{{bp.Post_image.url}}" alt="Post Image"></a>
+            <h1 class="mt-2">{{bp.Post_title}}</h1>
+
+            <div>
+                <span class="text-primary">
+                    <a href="#" class="avatar avatar-sm mr-2"><img style="width: 25px;" class="avatar-img rounded-circle" src="{{bp.Post_Creator.profile_pic.url}}"  alt="User Image"></a>
+                    <span>{{bp.Post_Creator.first_name}}</span> <span>{{bp.Post_Creator.last_name}}</span> </span>  <span>|</span>
+
+                <span class="text-primary" ><i class="fa-solid fa-clock"></i> <span>{{bp.Created_at}}</span> </span>  <span>|</span>
+    
+                <span class="text-primary" ><i class="fa-solid fa-comment"></i> <span>{{bp.Total_comment}}</span> comments </span>
+            </div>
+           
+           
+            <div>
+                <p>{{bp.Post_Discription|linebreaks|slice:"0:725"|safe}}</p>
+            </div>
+
+            <div class="mt-2" style="text-align: right;">
+                <a target="_blank" class="btn bg-primary btn-block w-50 ms-auto" href="/learn_more_about_block/{{bp.id}}/">Learn More</a>
+            </div>
+            
+            <br>
+
+
+            <!-- Part Of Comments Sections -->
+
+
+
+            <h3> <i class="fa-solid fa-comment"></i>Comments</h3>
+
+            <!-- Post A comments -->
+            <!-- <form action="{% url 'sent_commentss' %}" method="post">
+            {% csrf_token %}
+
+                <div class="input-group">
+
+                    <div style="display: none;">
+                        <input type="number" name="CommentSender" value="{{user.id}}" class="form-control form-control-lg" placeholder="Write Comments" />
+
+                        <input type="number" name="POSTID" value="{{bp.id}}" class="form-control form-control-lg" placeholder="Write Comments" />
+
+                    </div>
+                    <input type="text" name="CommenstText" class="form-control form-control-lg" placeholder="Write Comments" />
+                    <button type="submit" class="form-control-lg btn bg-dark text-primary shadow-lg"><i class="fas fa-paper-plane"></i></button>
+
+                </div>               
+
+            </form> -->
+            <!-- Post A comments -->
+
+            <hr style="width: 100%; height: 2px;background-color: black; text-align: center;">
+
+
+            <!-- show Comments of the Post -->
+
+            <div style="height: 250px; overflow: auto;" >
+                {% for x in CMTS %}
+
+                {% if x.post_id == bp %}
+                      
+                <div>
+                    <h2 class="table-avatar">
+                        <a href="#" class="avatar avatar-sm mr-2"><img style="width: 35px;" class="avatar-img rounded-circle" src="{{x.admin.profile_pic.url}}"  alt="User Image"></a>
+                        <a href="#"> <span>{{x.admin.first_name}}</span> <span>{{x.admin.last_name}}</span>| <span class="text-primary" ><i class="fa-solid fa-clock"></i> <span>{{x.created_at.date}}</span> </span> </a>
+                    </h2>
+                    
+                    <p>{{x.comments_text}} </p>
+
+
+
+
+                </div>
+
+                
+                 {% for y in REPS %}
+                 {% if y.com_id == x %}  
+                <div class="w-75 ms-auto mb-4">
+                    <h4 class="table-avatar">
+                        <a href="#" class="avatar avatar-sm mr-2"><img style="width: 25px;" class="avatar-img rounded-circle" src="{{y.admin.profile_pic.url}}"  alt="User Image"></a>
+                        <a href="#"> <span>{{y.admin.first_name}}</span> <span>{{y.admin.last_name}}</span>| <span class="text-primary" ><i class="fa-solid fa-clock"></i> <span>{{y.created_at.date}}</span> </span> </a>
+                    </h4>
+                    
+                    <p>{{y.comments_text}} </p>
+  
+                    
+                </div>
+                {% else %}
+
+                {% endif %}
+                {% endfor %}
+
+                {% else %}
+    
+                {% endif %}
+            
+                {% endfor %}
+        
+                <!-- End sow comments -->
+
+            </div> 
+            
+            
+
+
+            <!-- End of Part Of Comments Sections -->
+
+
+            
+        </div>
+
+        <!-- End Post Sections -->
+        {% endfor %} 
+
+
+
+    </div>
+
+
+
+</div>
+<!-- Modal Of Boostrap for senting Reply -->
+
+<!-- Modal -->
+
+
+{% for x in CMTS %}
+<div class="modal fade" id="exampleModal-{{x.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">sent reply </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form action="{% url 'sent_replyss' %}"  method="post">
+            {% csrf_token %}
+    
+                    <div class="input-group">
+    
+                        <div style="display: none;">
+                            <input type="number" name="CommentSender" value="{{user.id}}" class="form-control form-control-lg" placeholder="Write Comments" />
+    
+                            <input type="number" name="CMTID" value="{{x.id}}" class="form-control form-control-lg" placeholder="Write Comments" />
+    
+                        </div>
+                        <input type="text" name="CommenstText" class="form-control form-control-lg" placeholder="Write Comments" />
+                        <button type="submit" class="form-control-lg btn bg-dark text-primary shadow-lg"><i class="fas fa-paper-plane"></i></button>
+    
+                    </div>               
+    
+                </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+
+
+
+
+
+  <script src="/static/myassets/scripts.js" ></script>
+{% endblock %}
+
+

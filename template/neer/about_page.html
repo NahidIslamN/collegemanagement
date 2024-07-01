@@ -1,0 +1,125 @@
+{% extends "neer_page.html" %}
+
+{% block start %}
+
+<div class="col-12 mb=5">
+    .
+</div>
+
+<div class="conteiner col-11 me-auto ms-auto mt-5 mb-5">
+
+
+    <div class="row">
+   
+            <div class="col-lg-3 col-sm-6 me-auto ms-auto shadow-lg mb-5">
+                {% if Vice_principal.BasicInfo.profile_pic %}
+                <img class="w-100"  src="{{Vice_principal.BasicInfo.profile_pic.url}}" alt="Principal">
+                {% else %}
+                <img class="w-100" src="/static/USERLOGO/USER.png" alt="Principal">
+                {% endif %}
+                <h2 class="mt-5">Vice-Principal</h2>
+                <h3 class="mt-3" ><span>{{Vice_principal.BasicInfo.first_name}}</span> <span>{{Vice_principal.BasicInfo.last_name}}</span> </h3>        
+              </div>        
+              <div style="text-align: justify;" class="col-lg-8 col-sm-12 shadow-lg p-2 mb-5">
+               <span>{{Vice_principal.Discription|linebreaks|slice:"0:780"|safe}}</span>
+        
+               <a target="_blank" href="/learn_more_about_vice/" class="btn w-100">learn more ...</a>        
+              </div>
+     
+    </div>
+
+</div>
+
+<!-- Vice principal Discriptions Complete -->
+
+
+<!-- about TPI Section -->
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-6 col-sm-10 col-12 me-auto ms-auto">
+            <h1><b>Wellcome to {{TPI.Collage_Name}}</b></h1>
+            <p style="text-align: justify;">
+                {{TPI.Collge_Discrition|slice:"0:535"}}
+            </p>
+            <a target="_blank" href="/learn_more_about_tpi/" class="btn btn-3 w-100 mb-3" >Learn More ...</a>
+        </div>
+        <div class="col-lg-6 col-sm-10 col-12 me-auto ms-auto">
+            <img class="w-100" src="{{TPI.Collage_Image.url}}" alt="Collages">
+
+        </div>
+    </div>
+</div>
+<!-- End of TPI -->
+
+
+
+<!-- Mission And Vission Of Thakurgaon -->
+<div class="container">
+    <div class="row">
+
+        <div class="col-12 mt-5 pt-4 rounded-4">
+            <h1 class="text-center"><b>Mission & Vission of Thakurgaon Polytechnic Institute</b></h1>
+            <h1 class="text-center text-danger"><span><sup>-----</sup></span></h1>
+        </div>
+
+
+        <div class="col-lg-6 co-sm-10 co-12 mb-5 ms-auto me-auto">
+            
+            <div style="height: 500px; overflow: auto;" class="p-5 card shadow-sm">
+                <h1>Missions</h1>
+                <ul style="text-align: justify;">
+                    {% for m in Missions %}
+                    <li>{{m.Mission_text}}</li>
+                    {% endfor %}
+                
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="col-lg-6 co-sm-10 mb-5 co-12 ms-auto me-auto">
+            <div style="height: 500px; overflow: auto;" class="p-5 card shadow-sm">
+                <h1>Vissions</h1>
+                <ul style="text-align: justify;">
+                    {% for v in Vissions %}
+                    <li>{{v.Vission_text}}</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12 mt-5 pt-4 rounded-4">
+                <h1 class="text-center"><b>Photo Gallary</b></h1>
+                <h1 class="text-center text-danger"><span><sup>-----</sup></span></h1>
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-12">
+                <a target="_blank" href="/Images_gelary/0/">
+                   
+                    <img class="w-100" src="{{IMG_Student.Image.url}}" alt="Images">
+                  
+                </a>
+                <h3 class="text-center mt-3">Events</h3>
+
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-12">
+                <a target="_blank" href="/Images_gelary/1/"><img class="w-100" src="{{IMG_Collage.Image.url}}" alt="Images"></a>
+                <h3 class="text-center mt-3">About Collage</h3>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

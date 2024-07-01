@@ -1,0 +1,191 @@
+
+
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+     <title>tip.govt.bd | Education</title>
+     <link rel="shortcut icon" href="/static/USERLOGO/favicon.ico">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
+     <link rel="stylesheet" href="/static/assets/plugins/bootstrap/css/bootstrap.min.css">
+     <link rel="stylesheet" href="/static/assets/plugins/fontawesome/css/fontawesome.min.css">
+     <link rel="stylesheet" href="/static/assets/plugins/fontawesome/css/all.min.css">
+     <link rel="stylesheet" href="/static/assets/css/style.css">
+     <style>
+         body {
+             font-family: 'Poppins', sans-serif;
+             background-color: #f8f9fa;
+         }
+ 
+         .container.card {
+             background-color: #fff;
+             border-radius: 10px;
+             padding: 30px;
+             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+             margin-top: 20px;
+         }
+ 
+         h1 {
+             color: #333;
+         }
+ 
+         address.student-details {
+             color: #555;
+         }
+ 
+         .table {
+             background-color: #fff;
+             border-radius: 10px;
+             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         }
+ 
+         .table th,
+         .table td {
+             border: none;
+         }
+ 
+         #printButton {
+             background-color: #007bff;
+             border-color: #007bff;
+             color: #fff;
+         }
+ 
+         #printButton:hover {
+             background-color: #0056b3;
+             border-color: #0056b3;
+         }
+     </style>
+ </head>
+ 
+ <body>
+ 
+     <div class="container card shadow-sm p-3 mt-3 mx-auto">
+         <div class="row">
+             <div class="col-md-12 mb-5">
+                 <h1 class="text-center">Result Sheet</h1>
+             </div>
+ 
+             <div class="col-md-12 mt-4">
+                 <div class="row">
+                     <div class="col-4 mb-3 mb-md-0">
+                         <address class="student-details">
+                             Name <br> Student ID <br> Department <br> Father Name <br> Mother Name <br> Date OF Birth <br>
+                         </address>
+                     </div>
+ 
+                   
+ 
+                     <div class="col-8">
+                         <address class="student-details">
+                             <span>{{Stude.admin.first_name}}</span> <span>{{Stude.admin.last_name}}</span> <br>
+                             <span>{{Stude.id}}</span> <br>
+                             <span>{{Stude.Dep_id.Dep_Name}}</span> <br>
+                             <span>{{Stude.father_name}}</span> <br>
+                             <span>{{Stude.mother_name}}</span> <br>
+                             <span>{{Stude.date_of_birth}}</span> <br>
+                         </address>
+                     </div>
+                 </div>
+             </div>
+ 
+             <!-- <div class="col-md-2">
+                 <a target="_blank" href="{{Stude.admin.profile_pic.url}}">
+                     <img style="float: right;" src="{{Stude.admin.profile_pic.url}}" class="w-100" alt="Student Image">
+                 </a>
+             </div> -->
+ 
+             {% if Res_count == Subcount %}
+             <div class="col-md-12">
+                 <h5>Semester : {{Sem_id}}</h5>
+             </div>
+ 
+             <div class="col-md-12 mt-3 mb-5">
+                 <table class="table">
+                     <thead>
+                         <tr>
+                             <th>Subject Name</th>
+                             <th>GPA</th>
+                             <th>Grade</th>
+                         </tr>
+                     </thead>
+ 
+                     <tbody>
+                         {% for x in Results %}
+                         <tr>
+                             <td>{{x.Subject_id.Subjects_Name}}</td>
+                             <td>{{x.Subjec_GPA}}</td>
+                             <td>{{x.Subject_Grade}}</td>
+                         </tr>
+                         {% endfor %}
+                     </tbody>
+                 </table>
+             </div>
+ 
+             <div class="col-md-6">
+                 <h3>Total GPA</h3>
+             </div>
+             {% if Fcount == 0 %}
+             <div class="col-md-6">
+                 <h3 style="float: right; margin-right: 20px;">{{GPA}} (out of 4.0)</h3>
+             </div>
+             {% else %}
+             <div class="col-md-6">
+                 <h3 style="float: right; margin-right: 20px;">0.00 (out of 4.0)</h3>
+             </div>
+             {% endif %}
+ 
+             <div class="col-md-6 mt-3">
+                 <h5>Total Fail Subject : {{Fcount}}</h5>
+             </div>
+             {% else %}
+             <div class="col-md-12">
+                 <h3 class="m-4"> Result Not Added Yet </h3>
+             </div>
+ 
+             <table class="table">
+                 <thead>
+                     <tr>
+                         <th>Subject Name</th>
+                         <th>GPA</th>
+                         <th>Grade</th>
+                     </tr>
+                 </thead>
+ 
+                 <tbody>
+                     {% for x in Results %}
+                     <tr>
+                         <td>{{x.Subject_id.Subjects_Name}}</td>
+                         <td>{{x.Subjec_GPA}}</td>
+                         <td>{{x.Subject_Grade}}</td>
+                     </tr>
+                     {% endfor %}
+                 </tbody>
+             </table>
+             {% endif %}
+         </div>
+     </div>
+ 
+     <div class="text-center">
+         <button id="printButton" class="btn btn-primary w-75 mt-3 mb-5">Save</button>
+     </div>
+ 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+ 
+     <script>
+         function generateAndOpenPDF() {
+             var element = document.querySelector('.container');
+             html2pdf().from(element).save();
+         }
+         document.getElementById('printButton').addEventListener('click', generateAndOpenPDF);
+     </script>
+ 
+     <script src="/static/assets/js/jquery-3.6.0.min.js"></script>
+     <script src="/static/assets/js/popper.min.js"></script>
+     <script src="/static/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+     <script src="/static/assets/js/script.js"></script>
+ </body>
+ 
+ </html>
+ 

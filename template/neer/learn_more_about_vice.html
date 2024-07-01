@@ -1,0 +1,39 @@
+{% extends "neer_page.html" %}
+
+{% block start %}
+
+<div class="col-12 mb=5">
+    .
+</div>
+
+<div class="conteiner col-11 me-auto ms-auto mt-5 mb-5">
+
+
+    <div class="row">
+   
+            <div class="col-4 me-auto ms-auto shadow-lg mb-5">
+                {% if Vice_principal.BasicInfo.profile_pic %}
+                <img class="w-100"  src="{{Vice_principal.BasicInfo.profile_pic.url}}" alt="Principal">
+                {% else %}
+                <img class="w-100" src="/static/USERLOGO/USER.png" alt="Principal">
+                {% endif %}
+                <h2 class="mt-5">Vice-Principal</h2>
+                <h3 class="mt-3" ><span>{{Vice_principal.BasicInfo.first_name}}</span> <span>{{Vice_principal.BasicInfo.last_name}}</span> </h3>        
+              </div>        
+              <div style="text-align: justify;" class="col-10 me-auto ms-auto shadow-lg p-2 mb-5">
+               <span>{{Vice_principal.Discription|linebreaks|safe}}</span>
+        
+               
+               <h3><span>{{Vice_principal.BasicInfo.first_name}}</span> <span>{{Vice_principal.BasicInfo.last_name}}</span></h3>
+               <h2>Vice-Principal</h2>
+               <h2>Thakurgaon Polytechnic Institute</h2>
+
+               <h1></h1>
+
+              </div>
+     
+    </div>
+
+</div>
+
+{% endblock %}

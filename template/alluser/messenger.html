@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+
+
+
+<div class="container">
+    <div class="row">
+
+
+        <div style="margin-left: auto;"  class="col-12 mt-3 mb-2">
+         <h1>Chats</h1>
+         <hr>
+
+
+            <div class="table-responsive">
+                <table class="table table-hover table-center mb-0 datatable">
+                  
+                  {% if unique_queryset %}
+                   <tbody>
+                    {% for x in unique_queryset %}
+
+                    
+                     
+                     <tr> 
+
+                        <td>
+                           <h2 class="table-avatar">
+                              <img class="avatar-img rounded-circle" width="50px"  src="{{x.from_sender.profile_pic.url}}" alt="Image">
+                           </h2>
+                           <b><span>{{x.from_sender.first_name}}</span> <span>{{x.from_sender.last_name}}</span> </b> <span>-----></span> sent you <span>-----></span> {{x.message_text|slice:"0:50"|safe}}.....
+                        </td>  
+                        
+                        <td>
+                           <a target="_blank" href="/message_sent_and_get/{{user.id}}/{{x.from_sender.id}}/">reply</a>                          
+                       </td>  
+
+                     </tr> 
+
+                
+
+
+                    {% endfor %}
+
+                   </tbody>
+                   {% else %}
+
+                   <h2>No Chats Available</h2>
+
+
+                   {% endif %}
+
+                </table>
+             </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+{% endblock %}

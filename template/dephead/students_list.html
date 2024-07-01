@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+
+{% block start %}
+
+
+
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Students</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/user_home_page/">Dashboard</a></li>
+                <li class="breadcrumb-item active">Students</li>
+             </ul>
+          </div>
+          <div class="col-auto text-right float-right ml-auto">
+             <a href="#" class="btn btn-outline-primary mr-2">Total Students : {{TS}}</a>
+    
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+
+
+
+                <div class="table-responsive">
+                   <table class="table table-hover table-center mb-0 datatable">            
+
+                      <thead>
+                         <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Semester</th>
+                            <th>Group</th>
+                            <th>Shift</th>
+                            <th>mobile</th>
+                            <th class="text-right">Action</th>
+                         </tr>
+                      </thead>
+
+                      <tbody>
+
+                        {% if Students %}
+                        {% for s in Students %}
+                         <tr>
+                            <td>{{s.id}}</td>
+                            <td>
+                               <h2 class="table-avatar">
+                                  <a target="_blank" href="{{s.admin.profile_pic.url}}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{s.admin.profile_pic.url}}" alt="User Image"></a>
+                                  <a href="#">{{s.admin.first_name}}</a>
+                               </h2>
+                            </td>
+                            <td>{{s.Dep_id.Dep_ID}}</td>
+                            <td>{{s.Sem_id}}</td>
+                            <td>{{s.group_id}}</td>
+                            <td>{{s.shift_id}}</td>
+                            <td>{{s.admin.username}}</td>
+                            <td class="text-right">
+                               <div class="actions">
+                                 
+                                 {% if user.user_type == "1" %}
+
+                                 {% if s.admin.user_type == "4" %}
+                                  <a href="/enable_or_desible_a_student/{{s.admin.id}}/disable/{{user.id}}/" class="btn btn-sm bg-success-light mr-2 ">
+                                  disable
+                                  </a>
+                                 {% else %}
+                                 <a href="#" class="btn btn-sm bg-success-light mr-2 disabled">
+                                    disable
+                                 </a>
+                                 {% endif %}
+
+
+                                 {% if s.admin.user_type == "0" %}
+
+                                  <a href="/enable_or_desible_a_student/{{s.admin.id}}/enable/{{user.id}}/" class="btn btn-sm bg-danger-light">
+                                  enable
+                                  </a>
+                                  {% else %}
+                                  <a href="#" class="btn btn-sm bg-danger-light disabled">
+                                    enable
+                                    </a>
+                                  {% endif %}
+
+                                  <a href="/message_sent_and_get/{{user.id}}/{{s.admin.id}}/" class="btn btn-sm bg-danger-light">
+                                    Sent Masseges
+                                 </a>
+
+
+                                  {% elif user.user_type == "2" %}
+                                  <a target="_blank" href="/Update_a_student_data/{{s.admin.id}}/" class="btn btn-sm bg-success-light mr-2">
+                                    <i class="fas fa-pen"></i>
+                                    </a>                                  
+  
+
+                                    <a href="/message_sent_and_get/{{user.id}}/{{s.admin.id}}/" class="btn btn-sm bg-danger-light">
+                                       Sent Masseges
+                                    </a>
+                                    
+                                 {% elif user.user_type == "3" or user.user_type == "5" %}
+                                 <a href="/message_sent_and_get/{{user.id}}/{{s.admin.id}}/" class="btn btn-sm bg-danger-light">
+                                    Sent Masseges
+                                 </a>
+                                 {% endif %}
+                                    
+  
+
+
+                               </div>
+                            </td>
+                         </tr>
+                         {% endfor %}
+                         {% endif %}                       
+                      </tbody>
+                   </table>
+                </div>
+
+
+
+
+                                
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-end mt-4">
+       {% if Students.has_previous %}
+        <li class="page-item">
+              <a class="page-link" href="/get_student_list/{{user.id}}/?page=1"  >First</a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" href="?page={{Students.previous_page_number}}" tabindex="-1">Previous</a>
+        </li>
+       {% else %}
+       <li class="page-item">
+          <a class="page-link disabled" href="#"  >First</a>
+       </li>
+
+       <li class="page-item">
+              <a class="page-link disabled" href="#" tabindex="-1">Previous</a>
+       </li>
+       {% endif %}
+       
+       {% for p in totalpage_list %}
+        <li class="page-item"><a class="page-link" href="?page={{p}}">{{p}}</a></li>
+       {% endfor %}
+
+    
+        {% if Students.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{Students.next_page_number}}" >Next</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{last_page}}" >Last</a>
+        </li>
+        {% else %}
+        <!-- None -->
+        {% endif %}
+      </ul>
+  </nav>
+
+
+
+
+
+
+      
+
+
+
+
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+{% if user.user_type == "1" %}
+
+{% if Headof_dep %}
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row">
+          <div class="col">
+             <h3 class="page-title">Profile of Department Head</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/user_home_page/">Dashboard</a></li>
+                <li class="breadcrumb-item active">Profile</li>
+             </ul>
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-md-12">
+          <div class="profile-header">
+             <div class="row align-items-center">
+                <div class="col-auto profile-image">
+
+                   <a href="#">
+                  {% if Headof_dep.admin.profile_pic %}
+                   <img class="rounded-circle" alt="User Image" src="{{Headof_dep.admin.profile_pic.url}}">
+                   {% else %}
+                   <img class="rounded-circle" alt="User Image" src="/static/USERLOGO/USER.png">
+                   {% endif %}
+                   </a>
+
+                </div>
+                <div class="col ml-md-n2 profile-user-info">
+                    <h4 class="user-name mb-0"><span>{{Headof_dep.admin.first_name}}</span> <span>{{Headof_dep.admin.last_name}}</span></h4>
+                    <h6 class="text-muted">{{Headof_dep.Dep_id}}</h6>
+                 </div>
+                <div class="col-auto profile-btn">
+                   <a href="#" class="btn btn-primary">
+                   Edit
+                   </a>
+                </div>
+             </div>
+          </div>
+          <div class="profile-menu">
+             <ul class="nav nav-tabs nav-tabs-solid">
+                <li class="nav-item">
+                   <a class="nav-link active" data-toggle="tab" href="#per_details_tab">About</a>
+                </li>
+             </ul>
+          </div>
+          <div class="tab-content profile-tab-cont">
+             <div class="tab-pane fade show active" id="per_details_tab">
+                <div class="row">
+                   <div class="col-lg-12">
+                      <div class="card">
+                         <div class="card-body">
+                            <h5 class="card-title d-flex justify-content-between">
+                               <span>Personal Details</span>
+                               <a class="edit-link"  href="/user_profile_edite/{{user.username}}/"><i class="far fa-edit mr-1"></i>Edit</a>
+                            </h5>
+                            <div class="row">
+                               <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
+                               <p class="col-sm-9"><span>{{Headof_dep.admin.first_name}}</span> <span>{{Headof_dep.admin.last_name}}</span></p>
+                            </div>
+                            <div class="row">
+                               <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Date of Birth</p>
+                               <p class="col-sm-9">{{Headof_dep.Date_of_Birth}}</p>
+                            </div>
+                            <div class="row">
+                               <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Email ID</p>
+                               <p class="col-sm-9"><a href="https://preschool.dreamguystech.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="711b1e191f151e14311409101c011d145f121e1c">{{Headof_dep.admin.email}}</a></p>
+                            </div>
+                            <div class="row">
+                               <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Mobile</p>
+                               <p class="col-sm-9">{{Headof_dep.Mobile}}</p>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ {% else %}
+<div class="container">
+    <p class="m-5" >This Department comming soon in the institute</p>
+</div>
+{% endif %}
+
+
+{% endif %}
+
+
+
+{% endblock %}

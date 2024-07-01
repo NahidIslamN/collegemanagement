@@ -1,0 +1,136 @@
+
+<div class="header">
+    <div class="header-left">
+       <a href="/" class="logo">
+       <img src="/static/USERLOGO/logo-white1.png" alt="Logo">
+       </a>
+       <a href="/" class="logo logo-small">
+       <img src="/static/assets/img/logo-small.png" alt="Logo" width="30" height="30">
+       </a>
+    </div>
+    <a href="javascript:void(0);" id="toggle_btn">
+    <i class="fas fa-align-left"></i>
+    </a>
+    <div class="top-nav-search">
+      <h2 class="mt-2" >Wellcome <span>{{user.first_name}}</span> <span>{{user.last_name}}</span>  </h2>  
+    </div>
+    <a class="mobile_btn" id="mobile_btn">
+    <i class="fas fa-bars"></i>
+    </a>
+
+
+
+
+    <ul class="nav user-menu">
+
+      
+
+<!-- Work Place  Work PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork Place -->
+
+
+
+
+      <li class="nav-item dropdown noti-dropdown">
+         {% if unseenmessages_count is not None %}
+         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+         <i class="far fa-bell"></i> <span class="badge badge-pill">{{unseenmessages_count}}</span>
+         </a>
+         {% endif %}
+
+
+         <div class="dropdown-menu notifications">
+            <div class="topnav-dropdown-header">
+               <span class="notification-title">Message Notifications</span>
+               <a href="/clearallmessnotifications/" class="clear-noti"> Clear All </a>
+            </div>
+
+
+
+            <div class="noti-content">
+               <ul class="notification-list">
+                  {% if unseenmessages %}
+                  {% for x in unseenmessages %}
+                  <li class="notification-message">
+                     <a href="#">
+                        <div class="media">
+                           <span class="avatar avatar-sm">
+                           <img class="avatar-img rounded-circle" alt="User Image" src="{{x.from_sender.profile_pic.url}}">
+                           </span>
+                           <div class="media-body">
+                              <p class="noti-details"><span class="noti-title"><span>{{x.from_sender.first_name}}</span> <span>{{x.from_sender.first_name}}</span> </span> sent you <span class="noti-title">messages</span></p>
+                              <p class="noti-time"><span class="notification-time">{{x.create_at.time}}</span></p>
+                           </div>
+                        </div>
+                     </a>
+                  </li>
+                  {% endfor %}
+                  {% else %}
+                  <li class="d-block text-center" >not notifications yet</li>
+                  {% endif %}
+
+
+               </ul>
+            </div>
+            <div class="topnav-dropdown-footer">
+               <a href="#">View all Notifications</a>
+            </div>
+         </div>
+
+      </li>
+
+
+
+
+
+
+
+<!-- Work PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork PlaceWork Place -->
+
+
+
+
+      
+  
+       <li class="nav-item dropdown has-arrow">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+          <span class="user-img">
+            {% if user.profile_pic %}
+            <img class="rounded-circle" src="{{user.profile_pic.url}}" width="40" alt="{{user.first_name}}">
+            {% else %}
+            <img class="rounded-circle" src="/static/USERLOGO/USER.png" width="40" alt="{{user.last_name}}">
+            {% endif %}
+
+         </span>
+            
+          </a>
+          <div class="dropdown-menu">
+             <div class="user-header">
+                <div class="avatar avatar-sm">
+                  {% if user.profile_pic %}
+                  <img class="rounded-circle" src="{{user.profile_pic.url}}" width="31" alt="Ryan Taylor">
+                  {% else %}
+                  <img class="rounded-circle" src="/static/USERLOGO/USER.png" width="31" alt="Ryan Taylor">
+                  {% endif %}     
+                </div>
+                <div class="user-text">
+                   <h6><span>{{user.first_name}}</span> <span>{{user.last_name}}</span></h6>
+                   {% if user.user_type == "1" %}
+                   <p class="text-muted mb-0">Administrator</p>
+                   {% elif user.user_type == "2" %}
+                   <p class="text-muted mb-0">Head Of Dep</p>
+                   {% elif user.user_type == "3" %}
+                   <p class="text-muted mb-0">Teacher</p>
+                   {% elif user.user_type == "4" %}
+                   <p class="text-muted mb-0">Student</p>
+                   {% elif user.user_type == "5" %}
+                   <p class="text-muted mb-0">Home Manager</p>
+                   {% endif %}
+                </div>
+             </div>
+             <a class="dropdown-item" href="/user_profile/{{user.username}}/">My Profile</a>
+             <a class="dropdown-item" href="/sent_massege_to_user/{{user.id}}/">Inbox</a>
+             <a class="dropdown-item" href="/user_logout/">Logout</a>
+          </div>
+       </li>
+    </ul>
+ </div>

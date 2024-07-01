@@ -1,0 +1,20 @@
+{% extends "neer_page.html" %}
+
+{% block start %}
+
+
+<div class="container">
+    <div class="row">
+      
+        <div class="col-12 ms-auto me-auto mt-5 card shadow-lg p-3">
+            <img src="{{CRS.Dep_Image.url}}" alt="Images">
+            <h1 class="mt-3" class="text-center"><b>{{CRS.dep_name}}</b></h1> 
+            <span class="P-3" style="text-align: justify;">{{CRS.dep_description|linebreaks}}</span>
+
+            <a class="btn bnt3 w-50 me-auto ms-auto" href="/appy_to_become_a_sutdent/{{CRS.dep_name.id}}/">Apply Now</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
